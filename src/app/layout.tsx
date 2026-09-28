@@ -6,6 +6,7 @@ import "./dynamic.css";
 import Navbar, { type Announcement } from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ToastProvider from "@/components/Toast";
+import Splash from "@/components/Splash";
 import RevealController from "@/components/RevealController";
 import ScrollEffects from "@/components/ScrollEffects";
 import Interactions from "@/components/Interactions";
@@ -54,7 +55,7 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
-const themeScript = `(function(){try{var d=document.documentElement;d.classList.add('js');var t=localStorage.getItem('ieee-theme');if(!t){t=window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'}d.dataset.theme=t}catch(e){document.documentElement.classList.add('js')}})();`;
+const themeScript = `(function(){var d=document.documentElement;try{d.classList.add('js');var t=localStorage.getItem('ieee-theme');if(!t){t=window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'}d.dataset.theme=t;if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches&&!sessionStorage.getItem('ieee-splash')){d.classList.add('splash-on')}}catch(e){d.classList.add('js')}})();`;
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   const links = [...navLinks];
@@ -88,6 +89,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }} />
       </head>
       <body>
+        <Splash />
         <ToastProvider>
           <Navbar links={links} announcement={announcement} />
           {children}
