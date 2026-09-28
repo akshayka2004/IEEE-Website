@@ -12,7 +12,7 @@ export default function TeamGrid({ people, sizes = "(max-width: 700px) 50vw, 25v
     <>
       <div className="people" data-reveal="stagger">
         {people.map((person) => (
-          <button className="person spot" key={person.name} onClick={() => setSelected(person)} aria-label={`${person.name}, ${person.role} — view profile`}>
+          <button className="person spot tilt" key={person.name} onClick={() => setSelected(person)} aria-label={`${person.name}, ${person.role} — view profile`}>
             <div className="person-photo shimmer">
               <Img src={person.image} alt="" width={500} height={240} sizes={sizes} />
             </div>

@@ -4,6 +4,7 @@ import PageHero from "@/components/PageHero";
 import PurposeTabs from "@/components/PurposeTabs";
 import Timeline from "@/components/Timeline";
 import Achievements from "@/components/Achievements";
+import SectionDots from "@/components/SectionDots";
 import Img from "@/components/Img";
 import { missions } from "@/lib/data";
 import { getAchievements, getTimeline } from "@/lib/content";
@@ -27,7 +28,17 @@ export default function AboutPage() {
         image="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=2200&q=85"
       />
 
-      <section className="about">
+      <SectionDots
+        sections={[
+          { id: "about-intro", label: "Who we are" },
+          { id: "purpose", label: "Purpose" },
+          ...(timeline.length > 0 ? [{ id: "timeline", label: "Journey" }] : []),
+          ...(achievements.length > 0 ? [{ id: "achievements", label: "Recognition" }] : []),
+          { id: "get-involved", label: "Get involved" },
+        ]}
+      />
+
+      <section className="about" id="about-intro">
         <div className="container about-grid">
           <div className="about-copy" data-reveal="stagger">
             <div className="eyebrow">Who We Are</div>
@@ -71,7 +82,7 @@ export default function AboutPage() {
       <Timeline items={timeline} />
       <Achievements items={achievements} />
 
-      <section className="cta-band">
+      <section className="cta-band" id="get-involved">
         <div className="container cta-inner" data-reveal="stagger">
           <div>
             <div className="eyebrow">Get involved</div>

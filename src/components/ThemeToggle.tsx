@@ -1,13 +1,32 @@
 "use client";
 
+type DocWithTransitions = Document & {
+  startViewTransition?: (cb: () => void | Promise<void>) => void;
+};
+
 export default function ThemeToggle() {
-  function toggle() {
+  function toggle(e: React.MouseEvent<HTMLButtonElement>) {
     const root = document.documentElement;
     const next = root.dataset.theme === "dark" ? "light" : "dark";
-    root.dataset.theme = next;
-    try {
-      localStorage.setItem("ieee-theme", next);
-    } catch {}
+    const apply = () => {
+      root.dataset.theme = next;
+      try {
+        localStorage.setItem("ieee-theme", next);
+      } catch {}
+    };
+
+    const doc = document as DocWithTransitions;
+    if (!doc.startViewTransition || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      apply();
+      return;
+    }
+
+    const rect = e.currentTarget.getBoundingClientRect();
+    root.style.setProperty("--theme-x", `${rect.left + rect.width / 2}px`);
+    root.style.setProperty("--theme-y", `${rect.top + rect.height / 2}px`);
+    root.classList.add("theme-transitioning");
+    doc.startViewTransition(apply);
+    window.setTimeout(() => root.classList.remove("theme-transitioning"), 700);
   }
 
   return (

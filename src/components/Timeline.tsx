@@ -4,7 +4,7 @@ export default function Timeline({ items }: { items: TimelineItem[] }) {
   if (items.length === 0) return null;
 
   return (
-    <section className="timeline-section" aria-labelledby="timeline-title">
+    <section className="timeline-section" id="timeline" aria-labelledby="timeline-title">
       <div className="container">
         <div data-reveal="stagger">
           <div className="eyebrow">Our journey</div>

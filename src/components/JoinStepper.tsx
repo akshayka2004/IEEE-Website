@@ -1,8 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { societies } from "@/lib/data";
 import { useToast } from "./Toast";
+import { confettiBurst } from "@/lib/confetti";
 
 type Form = { name: string; email: string; department: string; year: string; interests: string[]; why: string };
 type Status = "idle" | "sending" | "done" | "error";
@@ -18,6 +19,7 @@ export default function JoinStepper() {
   const [form, setForm] = useState<Form>({ name: "", email: "", department: "", year: "", interests: [], why: "" });
   const [hp, setHp] = useState("");
   const { toast } = useToast();
+  const submitBtn = useRef<HTMLButtonElement>(null);
 
   const set = <K extends keyof Form>(key: K, value: Form[K]) => setForm((f) => ({ ...f, [key]: value }));
 
@@ -56,6 +58,7 @@ export default function JoinStepper() {
       if (!res.ok) throw new Error();
       setStatus("done");
       toast("Thanks — we'll be in touch soon", "success");
+      confettiBurst(submitBtn.current);
     } catch {
       setStatus("error");
       toast("Couldn't submit right now. Please try again.", "error");
@@ -175,7 +178,7 @@ export default function JoinStepper() {
           ) : (
             <span />
           )}
-          <button type="submit" className="btn btn-primary" disabled={status === "sending"}>
+          <button type="submit" ref={submitBtn} className="btn btn-primary" disabled={status === "sending"}>
             {step < STEPS.length - 1 ? "Continue →" : status === "sending" ? "Submitting…" : "Submit →"}
           </button>
         </div>

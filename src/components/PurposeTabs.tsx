@@ -22,7 +22,7 @@ export default function PurposeTabs() {
   const current = missions[active];
 
   return (
-    <section className="purpose" aria-labelledby="purpose-title">
+    <section className="purpose" id="purpose" aria-labelledby="purpose-title">
       <div className="container">
         <div data-reveal="stagger">
           <div className="eyebrow">What drives us</div>

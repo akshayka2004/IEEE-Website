@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import EventCard from "./EventCard";
 import EventsCalendar from "./EventsCalendar";
@@ -13,6 +13,18 @@ export default function EventsExplorer({ events }: { events: EventItem[] }) {
   const [tab, setTab] = useState<Tab>("upcoming");
   const [tag, setTag] = useState("All");
   const [query, setQuery] = useState("");
+  const touchX = useRef<number | null>(null);
+
+  function onTouchStart(e: React.TouchEvent) {
+    touchX.current = e.touches[0].clientX;
+  }
+  function onTouchEnd(e: React.TouchEvent) {
+    if (touchX.current === null) return;
+    const dx = e.changedTouches[0].clientX - touchX.current;
+    touchX.current = null;
+    if (dx > 50) setTab("upcoming");
+    else if (dx < -50) setTab("past");
+  }
 
   const tags = useMemo(() => ["All", ...Array.from(new Set(events.map((e) => e.tag)))], [events]);
 
@@ -102,7 +114,7 @@ export default function EventsExplorer({ events }: { events: EventItem[] }) {
                 </button>
               </div>
             ) : (
-              <div className="events-grid" key={`${tab}-${tag}-${query}`}>
+              <div className="events-grid" key={`${tab}-${tag}-${query}`} onTouchStart={onTouchStart} onTouchEnd={onTouchEnd}>
                 {results.map((event, i) => (
                   <div className="card-in" style={{ animationDelay: `${Math.min(i, 8) * 60}ms` }} key={event.slug}>
                     <EventCard event={event} />

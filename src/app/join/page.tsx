@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import PageHero from "@/components/PageHero";
 import JoinStepper from "@/components/JoinStepper";
 import Faq from "@/components/Faq";
+import SectionDots from "@/components/SectionDots";
 
 export const metadata: Metadata = {
   title: "Join the Branch | IEEE Student Branch",
@@ -19,7 +20,14 @@ export default function JoinPage() {
         image="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=2200&q=85"
       />
 
-      <section className="join">
+      <SectionDots
+        sections={[
+          { id: "join-form", label: "Join form" },
+          { id: "faq", label: "FAQ" },
+        ]}
+      />
+
+      <section className="join" id="join-form">
         <div className="container join-grid">
           <div className="join-intro" data-reveal="stagger">
             <div className="eyebrow">Membership</div>
@@ -43,7 +51,7 @@ export default function JoinPage() {
         </div>
       </section>
 
-      <section className="faq-section" aria-labelledby="faq-title">
+      <section className="faq-section" id="faq" aria-labelledby="faq-title">
         <div className="container faq-grid">
           <div data-reveal="stagger">
             <div className="eyebrow">Questions</div>

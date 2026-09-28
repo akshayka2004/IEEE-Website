@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import EventCard from "./EventCard";
 import Countdown from "./Countdown";
@@ -8,9 +8,21 @@ import type { EventItem } from "@/lib/events";
 
 export default function EventsSection({ events, limit = 3 }: { events: EventItem[]; limit?: number }) {
   const [tab, setTab] = useState<"upcoming" | "past">("upcoming");
+  const touchX = useRef<number | null>(null);
 
   const filtered = useMemo(() => events.filter((e) => e.status === tab).slice(0, limit), [events, tab, limit]);
   const next = events.find((e) => e.status === "upcoming");
+
+  function onTouchStart(e: React.TouchEvent) {
+    touchX.current = e.touches[0].clientX;
+  }
+  function onTouchEnd(e: React.TouchEvent) {
+    if (touchX.current === null) return;
+    const dx = e.changedTouches[0].clientX - touchX.current;
+    touchX.current = null;
+    if (dx > 50) setTab("upcoming");
+    else if (dx < -50) setTab("past");
+  }
 
   return (
     <section className="events" id="events" aria-labelledby="events-title">
@@ -52,7 +64,7 @@ export default function EventsSection({ events, limit = 3 }: { events: EventItem
           </div>
         )}
 
-        <div className="events-grid" key={tab}>
+        <div className="events-grid" key={tab} onTouchStart={onTouchStart} onTouchEnd={onTouchEnd}>
           {filtered.map((event, i) => (
             <div className="card-in" style={{ animationDelay: `${i * 70}ms` }} key={event.slug}>
               <EventCard event={event} />

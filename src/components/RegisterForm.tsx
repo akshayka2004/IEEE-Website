@@ -1,13 +1,15 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useToast } from "./Toast";
+import { confettiBurst } from "@/lib/confetti";
 
 type Status = "idle" | "sending" | "done" | "error";
 
 export default function RegisterForm({ slug, title }: { slug: string; title: string }) {
   const [status, setStatus] = useState<Status>("idle");
   const { toast } = useToast();
+  const submitBtn = useRef<HTMLButtonElement>(null);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -30,6 +32,7 @@ export default function RegisterForm({ slug, title }: { slug: string; title: str
       form.reset();
       setStatus("done");
       toast(`You're registered for ${title}`, "success");
+      confettiBurst(submitBtn.current);
     } catch {
       setStatus("error");
       toast("Registration didn't go through. Please try again.", "error");
@@ -61,7 +64,7 @@ export default function RegisterForm({ slug, title }: { slug: string; title: str
 
       <input type="text" name="website" className="hp-field" tabIndex={-1} autoComplete="off" aria-hidden="true" />
 
-      <button className="btn btn-primary" type="submit" disabled={status === "sending"}>
+      <button ref={submitBtn} className="btn btn-primary" type="submit" disabled={status === "sending"}>
         {status === "sending" ? "Registering…" : "Register →"}
       </button>
 

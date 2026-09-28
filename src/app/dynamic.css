@@ -2799,3 +2799,294 @@ a.society-wrap {
     font-size: 10px;
   }
 }
+
+/* ---------- view transitions (route + theme) ---------- */
+@supports (view-transition-name: none) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation-duration: 0.42s;
+  }
+  ::view-transition-old(root) {
+    animation-name: vtOut;
+  }
+  ::view-transition-new(root) {
+    animation-name: vtIn;
+  }
+  @keyframes vtOut {
+    to {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+  }
+  @keyframes vtIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+  }
+
+  html.theme-transitioning::view-transition-old(root) {
+    animation: none;
+  }
+  html.theme-transitioning::view-transition-new(root) {
+    animation: themeReveal 0.6s ease;
+  }
+  @keyframes themeReveal {
+    from {
+      clip-path: circle(0% at var(--theme-x, 50%) var(--theme-y, 50%));
+    }
+    to {
+      clip-path: circle(150% at var(--theme-x, 50%) var(--theme-y, 50%));
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+}
+
+/* ---------- word-by-word heading reveal ---------- */
+.split-word {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+}
+
+.split-word-inner {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(100%);
+  animation: splitIn 0.85s var(--ease) both;
+}
+
+@keyframes splitIn {
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.hero-content h1,
+.page-hero-content h1 {
+  animation: none;
+}
+
+/* ---------- nav link underline ---------- */
+.nav-links a {
+  position: relative;
+}
+
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 100%;
+  bottom: -6px;
+  height: 2px;
+  background: currentColor;
+  transition: right 0.3s var(--ease);
+}
+
+.nav-links a:hover::after,
+.nav-links a.active::after {
+  right: 0;
+}
+
+.nav-links a.nav-join::after {
+  display: none;
+}
+
+/* ---------- card tilt ---------- */
+.tilt {
+  transition: transform 0.2s ease;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+/* ---------- confetti ---------- */
+.confetti-layer {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 250;
+  overflow: hidden;
+}
+
+.confetti-piece {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+  transform: translate(-50%, -50%);
+}
+
+/* ---------- toast exit ---------- */
+.toast.is-leaving {
+  animation: toastOut 0.3s ease forwards;
+}
+
+@keyframes toastOut {
+  to {
+    opacity: 0;
+    transform: translateY(10px) scale(0.96);
+  }
+}
+
+/* ---------- section quick-nav dots ---------- */
+.section-dots {
+  position: fixed;
+  right: 22px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 45;
+  display: none;
+  flex-direction: column;
+  gap: 14px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.section-dots.is-visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.section-dots a {
+  position: relative;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--line);
+  transition: background-color 0.25s ease, transform 0.25s ease;
+}
+
+.section-dots a.is-active {
+  background: var(--orange);
+  transform: scale(1.3);
+}
+
+.section-dots-tip {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%) translateX(6px);
+  background: var(--night);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 5px 10px;
+  border-radius: 6px;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.section-dots a:hover .section-dots-tip,
+.section-dots a:focus-visible .section-dots-tip {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(-50%) translateX(0);
+}
+
+@media (min-width: 1181px) {
+  .section-dots {
+    display: flex;
+  }
+}
+
+/* ---------- society flip cards ---------- */
+.flip-card {
+  display: block;
+  height: 230px;
+  perspective: 1200px;
+  color: inherit;
+}
+
+.flip-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s var(--ease);
+  transform-style: preserve-3d;
+}
+
+@media (hover: hover) {
+  .flip-card:hover .flip-inner {
+    transform: rotateY(180deg);
+  }
+}
+
+.flip-card:focus-visible .flip-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  padding: 26px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 6px;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.flip-card:hover .flip-face,
+.flip-card:focus-visible .flip-face {
+  border-color: var(--orange);
+  box-shadow: var(--shadow);
+}
+
+.flip-back {
+  transform: rotateY(180deg);
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.flip-back-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--orange-text);
+}
+
+.flip-tags {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  justify-content: center;
+}
+
+.flip-tags li {
+  background: var(--surface-2);
+  border-radius: 999px;
+  padding: 4px 10px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.flip-face .society-more {
+  opacity: 1;
+  transform: none;
+  margin-top: 4px;
+}
+
+@media (max-width: 700px) {
+  .flip-card {
+    height: 210px;
+  }
+}

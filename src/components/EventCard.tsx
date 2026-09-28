@@ -4,7 +4,7 @@ import type { EventItem } from "@/lib/events";
 
 export default function EventCard({ event }: { event: EventItem }) {
   return (
-    <article className="event-card spot">
+    <article className="event-card spot tilt">
       <div className="event-photo shimmer">
         <Img
           src={event.image}

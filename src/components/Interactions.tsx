@@ -4,6 +4,7 @@ import { useEffect } from "react";
 
 const SPOT = ".spot";
 const MAGNET = ".btn-primary, .nav-join";
+const TILT = ".tilt";
 
 export default function Interactions() {
   useEffect(() => {
@@ -12,6 +13,7 @@ export default function Interactions() {
     if (!fine) return;
 
     let magnetEl: HTMLElement | null = null;
+    let tiltEl: HTMLElement | null = null;
 
     const onMove = (e: PointerEvent) => {
       const target = e.target as Element | null;
@@ -25,6 +27,19 @@ export default function Interactions() {
       }
 
       if (reduce) return;
+
+      const tilt = target.closest<HTMLElement>(TILT);
+      if (tilt) {
+        tiltEl = tilt;
+        const r = tilt.getBoundingClientRect();
+        const px = (e.clientX - r.left) / r.width - 0.5;
+        const py = (e.clientY - r.top) / r.height - 0.5;
+        tilt.style.transform = `perspective(700px) rotateX(${(-py * 7).toFixed(2)}deg) rotateY(${(px * 9).toFixed(2)}deg)`;
+      } else if (tiltEl) {
+        tiltEl.style.transform = "";
+        tiltEl = null;
+      }
+
       const mag = target.closest<HTMLElement>(MAGNET);
       if (mag && !(mag as HTMLButtonElement).disabled) {
         magnetEl = mag;
@@ -42,6 +57,10 @@ export default function Interactions() {
       if (magnetEl) {
         magnetEl.style.transform = "";
         magnetEl = null;
+      }
+      if (tiltEl) {
+        tiltEl.style.transform = "";
+        tiltEl = null;
       }
     };
 

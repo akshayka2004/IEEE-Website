@@ -1,4 +1,5 @@
 import Image from "next/image";
+import SplitWords from "./SplitWords";
 
 export default function PageHero({
   kicker,
@@ -20,7 +21,9 @@ export default function PageHero({
         <div className="eyebrow" style={{ color: "#ff9a61" }}>
           {kicker}
         </div>
-        <h1>{title}</h1>
+        <h1 className="split-heading">
+          <SplitWords text={title} />
+        </h1>
         <p>{desc}</p>
       </div>
     </section>

@@ -11,6 +11,7 @@ import RevealController from "@/components/RevealController";
 import ScrollEffects from "@/components/ScrollEffects";
 import Interactions from "@/components/Interactions";
 import SearchPalette from "@/components/SearchPalette";
+import ViewTransitions from "@/components/ViewTransitions";
 import { navLinks } from "@/lib/nav";
 import { getNews } from "@/lib/content";
 import { getNextEvent } from "@/lib/events";
@@ -98,6 +99,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <RevealController />
           <Interactions />
           <SearchPalette items={buildSearchIndex()} />
+          <ViewTransitions />
         </ToastProvider>
         {plausible && <Script defer data-domain={plausible} src="https://plausible.io/js/script.js" strategy="afterInteractive" />}
       </body>

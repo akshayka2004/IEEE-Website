@@ -23,12 +23,23 @@ export default function SocietiesPage() {
         <div className="container">
           <div className="societies-grid-static" data-reveal="stagger">
             {societies.map((society) => (
-              <Link href={`/societies/${society.slug}`} className="society-wrap spot" key={society.code}>
-                <div>
-                  <div className="society-logo">{society.code}</div>
-                  <span className="society-name">{society.name}</span>
-                  <p className="society-desc">{society.desc}</p>
-                  <span className="society-more">Explore →</span>
+              <Link href={`/societies/${society.slug}`} className="flip-card" key={society.code}>
+                <div className="flip-inner">
+                  <div className="flip-face flip-front">
+                    <div className="society-logo">{society.code}</div>
+                    <span className="society-name">{society.name}</span>
+                    <p className="society-desc">{society.desc}</p>
+                    <span className="society-more">Explore →</span>
+                  </div>
+                  <div className="flip-face flip-back">
+                    <span className="flip-back-label">Focus areas</span>
+                    <ul className="flip-tags">
+                      {society.focus.map((f) => (
+                        <li key={f}>{f}</li>
+                      ))}
+                    </ul>
+                    <span className="society-more">Explore →</span>
+                  </div>
                 </div>
               </Link>
             ))}

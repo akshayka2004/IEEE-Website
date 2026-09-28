@@ -44,12 +44,24 @@ export default function Home() {
             <span>Community</span>
           </div>
 
-          <h1>
-            Engineering
+          <h1 className="split-heading hero-h1">
+            <span className="split-word">
+              <span className="split-word-inner" style={{ animationDelay: "0.1s" }}>
+                Engineering
+              </span>
+            </span>
             <br />
-            <em>a better</em>
+            <em className="split-word">
+              <span className="split-word-inner" style={{ animationDelay: "0.22s" }}>
+                a better
+              </span>
+            </em>
             <br />
-            <RotatingWord />
+            <span className="split-word">
+              <span className="split-word-inner" style={{ animationDelay: "0.34s" }}>
+                <RotatingWord />
+              </span>
+            </span>
           </h1>
 
           <p className="hero-desc">

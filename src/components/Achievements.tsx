@@ -12,7 +12,7 @@ export default function Achievements({ items }: { items: Achievement[] }) {
   const shown = items.filter((i) => cat === "All" || i.category === cat);
 
   return (
-    <section className="achievements" aria-labelledby="achievements-title">
+    <section className="achievements" id="achievements" aria-labelledby="achievements-title">
       <div className="container">
         <div className="achievements-head" data-reveal="stagger">
           <div>
@@ -32,7 +32,7 @@ export default function Achievements({ items }: { items: Achievement[] }) {
 
         <div className="achievement-grid" key={cat}>
           {shown.map((a, i) => (
-            <article className="achievement spot card-in" style={{ animationDelay: `${i * 60}ms` }} key={a.title}>
+            <article className="achievement spot tilt card-in" style={{ animationDelay: `${i * 60}ms` }} key={a.title}>
               <span className="achievement-cat">{a.category}</span>
               <h3>{a.title}</h3>
               <p>{a.text}</p>
