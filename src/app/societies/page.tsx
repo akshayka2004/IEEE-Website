@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
 export default function SocietiesPage() {
   return (
-    <main>
+    <main id="main">
       <PageHero
         kicker="Societies ·"
         title="Explore our communities."

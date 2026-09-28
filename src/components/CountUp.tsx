@@ -10,6 +10,11 @@ export default function CountUp({ target, suffix = "" }: { target: number; suffi
     const el = ref.current;
     if (!el) return;
 
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      const id = requestAnimationFrame(() => setValue(target));
+      return () => cancelAnimationFrame(id);
+    }
+
     const observer = new IntersectionObserver(
       (entries, obs) => {
         entries.forEach((entry) => {

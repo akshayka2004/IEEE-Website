@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { contactEmail, socials } from "@/lib/site";
 
 export default function Footer() {
   return (
@@ -29,16 +30,18 @@ export default function Footer() {
           <div className="footer-col">
             <h4>Activities</h4>
             <Link href="/events">Events</Link>
-            <Link href="/contact">Newsletter</Link>
+            <Link href="/contact#newsletter">Newsletter</Link>
             <Link href="/gallery">Gallery</Link>
           </div>
 
           <div className="footer-col">
             <h4>Connect</h4>
-            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">Instagram</a>
-            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-            <a href="https://youtube.com" target="_blank" rel="noopener noreferrer">YouTube</a>
-            <a href="mailto:ieee@saintgits.org">Email</a>
+            {socials.map((s) => (
+              <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer">
+                {s.label}
+              </a>
+            ))}
+            <a href={`mailto:${contactEmail}`}>Email</a>
           </div>
 
           <div className="footer-col">
@@ -51,8 +54,10 @@ export default function Footer() {
         </div>
 
         <div className="footer-bottom">
-          <span>© 2026 IEEE Student Branch, Saintgits College of Engineering. All rights reserved.</span>
-          <span>Privacy Policy · Terms of Use</span>
+          <span>© {new Date().getFullYear()} IEEE Student Branch, Saintgits College of Engineering. All rights reserved.</span>
+          <span>
+            <Link href="/privacy">Privacy Policy</Link> · <Link href="/terms">Terms of Use</Link>
+          </span>
         </div>
       </div>
     </footer>

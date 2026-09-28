@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 
 export default function ExecomPage() {
   return (
-    <main>
+    <main id="main">
       <PageHero
         kicker="Execom ·"
         title="The people behind the branch."
@@ -24,7 +24,7 @@ export default function ExecomPage() {
             {execom.map((person) => (
               <article className="person" key={person.name}>
                 <div className="person-photo">
-                  <Image src={person.image} alt={person.name} width={500} height={240} />
+                  <Image src={person.image} alt={person.name} width={500} height={240} sizes="(max-width: 700px) 50vw, 25vw" />
                 </div>
                 <div className="person-info">
                   <div className="person-name">{person.name}</div>

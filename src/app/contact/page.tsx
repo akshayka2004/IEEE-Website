@@ -2,15 +2,17 @@ import type { Metadata } from "next";
 import PageHero from "@/components/PageHero";
 import NewsletterForm from "@/components/NewsletterForm";
 import ContactForm from "@/components/ContactForm";
+import { contactEmail, socials } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Contact | IEEE Student Branch",
   description: "Get in touch with the IEEE Student Branch at Saintgits College of Engineering.",
+  alternates: { canonical: "/contact" },
 };
 
 export default function ContactPage() {
   return (
-    <main>
+    <main id="main">
       <PageHero
         kicker="Contact"
         title="Let's build something together."
@@ -32,7 +34,7 @@ export default function ContactPage() {
             <div className="contact-card">
               <h3>Email</h3>
               <p>
-                <a href="mailto:ieee@saintgits.org">ieee@saintgits.org</a>
+                <a href={`mailto:${contactEmail}`}>{contactEmail}</a>
               </p>
             </div>
             <div className="contact-card">
@@ -43,10 +45,21 @@ export default function ContactPage() {
               <h3>Office Hours</h3>
               <p>Monday – Friday, 9:00 AM – 4:00 PM</p>
             </div>
-            <div className="contact-card">
-              <h3>Follow Us</h3>
-              <p>Instagram · LinkedIn · YouTube</p>
-            </div>
+            {socials.length > 0 && (
+              <div className="contact-card">
+                <h3>Follow Us</h3>
+                <p>
+                  {socials.map((s, i) => (
+                    <span key={s.label}>
+                      {i > 0 && " · "}
+                      <a href={s.href} target="_blank" rel="noopener noreferrer">
+                        {s.label}
+                      </a>
+                    </span>
+                  ))}
+                </p>
+              </div>
+            )}
           </div>
         </div>
       </section>

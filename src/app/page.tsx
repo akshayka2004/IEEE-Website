@@ -4,13 +4,23 @@ import CountUp from "@/components/CountUp";
 import EventsSection from "@/components/EventsSection";
 import SocietiesMarquee from "@/components/SocietiesMarquee";
 import NewsletterForm from "@/components/NewsletterForm";
-import { stats, execom, missions } from "@/lib/data";
+import { stats, execom, missions, gallery } from "@/lib/data";
 
 export default function Home() {
   return (
-    <main id="home">
+    <main id="main">
       {/* HERO */}
       <section className="hero">
+        <div className="hero-bg" aria-hidden="true">
+          <Image
+            src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=2200&q=85"
+            alt=""
+            fill
+            priority
+            sizes="100vw"
+            style={{ objectFit: "cover" }}
+          />
+        </div>
         <div className="container hero-content">
           <div className="hero-kicker">
             <span>Ideas</span>
@@ -44,7 +54,7 @@ export default function Home() {
           <div className="hero-meta">Saintgits College of Engineering · IEEE Student Branch</div>
         </div>
 
-        <div className="hero-index">SCROLL TO EXPLORE</div>
+        <div className="hero-index" aria-hidden="true">SCROLL TO EXPLORE</div>
       </section>
 
       {/* STATS */}
@@ -91,6 +101,7 @@ export default function Home() {
               alt="Students collaborating"
               width={1200}
               height={390}
+              sizes="(max-width: 700px) 100vw, (max-width: 1000px) 50vw, 33vw"
             />
           </div>
 
@@ -126,7 +137,7 @@ export default function Home() {
             {execom.slice(0, 4).map((person) => (
               <article className="person" key={person.name}>
                 <div className="person-photo">
-                  <Image src={person.image} alt={person.name} width={500} height={240} />
+                  <Image src={person.image} alt={person.name} width={500} height={240} sizes="(max-width: 700px) 50vw, 20vw" />
                 </div>
                 <div className="person-info">
                   <div className="person-name">{person.name}</div>
@@ -155,16 +166,9 @@ export default function Home() {
           </div>
 
           <div className="gallery-grid">
-            {[
-              { image: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=1000&q=85", caption: "IEEE Event" },
-              { image: "https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=900&q=85", caption: "Workshop" },
-              { image: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=900&q=85", caption: "Community" },
-              { image: "https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=1000&q=85", caption: "Team" },
-              { image: "https://images.unsplash.com/photo-1505236858219-8359eb29e329?auto=format&fit=crop&w=900&q=85", caption: "Competition" },
-              { image: "https://images.unsplash.com/photo-1531058020387-3be344556be6?auto=format&fit=crop&w=900&q=85", caption: "Activity" },
-            ].map((item, i) => (
+            {gallery.slice(0, 6).map((item, i) => (
               <div className="gallery-item" key={i}>
-                <Image src={item.image} alt="" width={1000} height={210} />
+                <Image src={item.image} alt={item.caption} width={1000} height={210} sizes="(max-width: 700px) 50vw, 30vw" />
                 <div className="gallery-caption">{item.caption}</div>
               </div>
             ))}

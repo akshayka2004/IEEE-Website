@@ -2,29 +2,63 @@
 
 import { useState } from "react";
 
-export default function NewsletterForm() {
-  const [submitted, setSubmitted] = useState(false);
+type Status = "idle" | "sending" | "done" | "error";
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+export default function NewsletterForm() {
+  const [status, setStatus] = useState<Status>("idle");
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setSubmitted(true);
-    e.currentTarget.reset();
+    const form = e.currentTarget;
+    const data = new FormData(form);
+    setStatus("sending");
+    try {
+      const res = await fetch("/api/newsletter", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: data.get("email"), website: data.get("website") }),
+      });
+      if (!res.ok) throw new Error();
+      form.reset();
+      setStatus("done");
+    } catch {
+      setStatus("error");
+    }
   }
 
-  if (submitted) {
+  if (status === "done") {
     return (
-      <div className="subscribe" style={{ justifyContent: "center", padding: "16px 20px" }}>
-        <span style={{ fontWeight: 700, fontSize: 13 }}>Thanks for subscribing! 🎉</span>
+      <div className="subscribe subscribe-done" role="status">
+        <span>Thanks for subscribing — you&apos;re on the list.</span>
       </div>
     );
   }
 
   return (
-    <form className="subscribe" onSubmit={handleSubmit}>
-      <input type="email" name="email" placeholder="Enter your email address" required />
-      <button className="btn btn-primary" type="submit">
-        Subscribe →
-      </button>
-    </form>
+    <div>
+      <form className="subscribe" onSubmit={handleSubmit}>
+        <label className="sr-only" htmlFor="newsletter-email">
+          Email address
+        </label>
+        <input
+          id="newsletter-email"
+          type="email"
+          name="email"
+          placeholder="Enter your email address"
+          autoComplete="email"
+          maxLength={254}
+          required
+        />
+        <input type="text" name="website" className="hp-field" tabIndex={-1} autoComplete="off" aria-hidden="true" />
+        <button className="btn btn-primary" type="submit" disabled={status === "sending"}>
+          {status === "sending" ? "Subscribing…" : "Subscribe →"}
+        </button>
+      </form>
+      {status === "error" && (
+        <p className="form-error" role="alert">
+          Couldn&apos;t subscribe right now. Please try again later or email us directly.
+        </p>
+      )}
+    </div>
   );
 }

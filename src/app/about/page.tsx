@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 
 export default function AboutPage() {
   return (
-    <main>
+    <main id="main">
       <PageHero
         kicker="About IEEE SB"
         title="More than a student branch."
@@ -42,6 +42,7 @@ export default function AboutPage() {
               alt="Students collaborating on a project"
               width={1200}
               height={390}
+              sizes="(max-width: 700px) 100vw, (max-width: 1000px) 50vw, 33vw"
             />
           </div>
 

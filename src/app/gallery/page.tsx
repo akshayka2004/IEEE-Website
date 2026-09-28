@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 
 export default function GalleryPage() {
   return (
-    <main>
+    <main id="main">
       <PageHero
         kicker="Gallery"
         title="Moments that matter."
@@ -23,7 +23,7 @@ export default function GalleryPage() {
           <div className="gallery-grid-full">
             {gallery.map((item, i) => (
               <div className="gallery-item" key={i}>
-                <Image src={item.image} alt="" width={900} height={220} />
+                <Image src={item.image} alt={item.caption} width={900} height={220} sizes="(max-width: 700px) 100vw, (max-width: 1000px) 50vw, 25vw" />
                 <div className="gallery-caption">{item.caption}</div>
               </div>
             ))}

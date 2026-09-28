@@ -148,3 +148,51 @@ export const missions = [
     desc: "Learning by building — workshops, competitions and mentorship rooted in practice.",
   },
 ];
+
+export const eventDetails: Record<string, { venue: string; time: string; about: string[] }> = {
+  "ai-ml-workshop": {
+    venue: "Saintgits College of Engineering",
+    time: "To be announced",
+    about: [
+      "A hands-on session exploring how artificial intelligence and machine learning are applied to real-world problems.",
+      "Participants work through guided exercises and leave with practical experience they can apply to their own projects.",
+    ],
+  },
+  "iot-sustainable-future": {
+    venue: "Saintgits College of Engineering",
+    time: "To be announced",
+    about: [
+      "A technical talk on the role of the Internet of Things in building smarter, more sustainable systems.",
+      "Expect case studies, live demonstrations and an open Q&A with the speakers.",
+    ],
+  },
+  "ieee-hackathon-2025": {
+    venue: "Saintgits College of Engineering",
+    time: "To be announced",
+    about: [
+      "Innovate. Build. Solve real challenges. Teams of students work against the clock to prototype solutions and pitch them to a panel.",
+      "Open to students from every department — bring an idea, find a team and build.",
+    ],
+  },
+  "women-in-engineering-meet": {
+    venue: "Saintgits College of Engineering",
+    time: "Concluded",
+    about: [
+      "A panel conversation with alumnae shaping the future of technology, followed by an open networking session.",
+    ],
+  },
+  "robotics-bootcamp": {
+    venue: "Saintgits College of Engineering",
+    time: "Concluded",
+    about: [
+      "A three-day intensive on building and programming robots, from mechanical assembly to control logic.",
+    ],
+  },
+  "paper-presentation": {
+    venue: "Saintgits College of Engineering",
+    time: "Concluded",
+    about: [
+      "A symposium showcasing undergraduate research across engineering domains, with feedback from faculty reviewers.",
+    ],
+  },
+};
