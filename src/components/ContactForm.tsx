@@ -1,11 +1,13 @@
 "use client";
 
 import { useState } from "react";
+import { useToast } from "./Toast";
 
 type Status = "idle" | "sending" | "done" | "error";
 
 export default function ContactForm() {
   const [status, setStatus] = useState<Status>("idle");
+  const { toast } = useToast();
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -26,8 +28,10 @@ export default function ContactForm() {
       if (!res.ok) throw new Error();
       form.reset();
       setStatus("done");
+      toast("Message sent — we'll be in touch", "success");
     } catch {
       setStatus("error");
+      toast("Couldn't send your message right now", "error");
     }
   }
 

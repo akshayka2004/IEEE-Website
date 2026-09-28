@@ -7,7 +7,7 @@ export default function SocietiesMarquee() {
   return (
     <section className="societies" id="societies" aria-labelledby="societies-title">
       <div className="container">
-        <div className="societies-head">
+        <div className="societies-head" data-reveal="stagger">
           <div>
             <div className="eyebrow">Societies ·</div>
             <h2 className="section-title" id="societies-title">
@@ -22,18 +22,23 @@ export default function SocietiesMarquee() {
       </div>
 
       <div className="society-track">
-        {doubled.map((society, i) => (
-          <div
-            className="society-wrap"
-            key={`${society.code}-${i}`}
-            aria-hidden={i >= societies.length ? true : undefined}
-          >
-            <div>
-              <div className="society-logo">{society.code}</div>
-              <span className="society-name">{society.name}</span>
-            </div>
-          </div>
-        ))}
+        {doubled.map((society, i) => {
+          const dup = i >= societies.length;
+          return (
+            <Link
+              href={`/societies/${society.slug}`}
+              className="society-wrap"
+              key={`${society.code}-${i}`}
+              aria-hidden={dup ? true : undefined}
+              tabIndex={dup ? -1 : undefined}
+            >
+              <div>
+                <div className="society-logo">{society.code}</div>
+                <span className="society-name">{society.name}</span>
+              </div>
+            </Link>
+          );
+        })}
       </div>
     </section>
   );

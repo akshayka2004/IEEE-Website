@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import PageHero from "@/components/PageHero";
 import { societies } from "@/lib/data";
 
 export const metadata: Metadata = {
   title: "Societies | IEEE Student Branch",
   description: "Explore the IEEE societies active at Saintgits College of Engineering.",
+  alternates: { canonical: "/societies" },
 };
 
 export default function SocietiesPage() {
@@ -19,15 +21,16 @@ export default function SocietiesPage() {
 
       <section className="societies">
         <div className="container">
-          <div className="societies-grid-static">
+          <div className="societies-grid-static" data-reveal="stagger">
             {societies.map((society) => (
-              <div className="society-wrap" key={society.code}>
+              <Link href={`/societies/${society.slug}`} className="society-wrap spot" key={society.code}>
                 <div>
                   <div className="society-logo">{society.code}</div>
                   <span className="society-name">{society.name}</span>
                   <p className="society-desc">{society.desc}</p>
+                  <span className="society-more">Explore →</span>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </div>

@@ -1,16 +1,43 @@
 :root {
+  color-scheme: light;
+  --night: #111820;
   --ink: #111820;
   --ink-2: #17232d;
   --cream: #f5f0e8;
   --paper: #fffdf8;
+  --surface: #ffffff;
+  --surface-2: #f0eee9;
+  --surface-3: #ebe6dd;
+  --news-bg: #f7e8dc;
   --orange: #f26a21;
   --orange-dark: #d95413;
+  --orange-text: #c2410c;
   --muted: #69747d;
   --line: #ddd7ce;
   --white: #ffffff;
+  --btn-dark-bg: #111820;
+  --btn-dark-fg: #ffffff;
   --max: 1240px;
   --radius: 18px;
   --shadow: 0 16px 40px rgba(17, 24, 32, 0.1);
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --ink: #f2efe9;
+  --ink-2: #17232d;
+  --cream: #121b22;
+  --paper: #0c1318;
+  --surface: #17232d;
+  --surface-2: #1b2934;
+  --surface-3: #233441;
+  --news-bg: #1d1712;
+  --orange-text: #ff9a61;
+  --muted: #9aa5ad;
+  --line: #26323a;
+  --btn-dark-bg: #f2efe9;
+  --btn-dark-fg: #111820;
+  --shadow: 0 16px 40px rgba(0, 0, 0, 0.45);
 }
 
 * {
@@ -59,6 +86,12 @@ textarea {
   font-weight: 700;
   letter-spacing: 0.22em;
   text-transform: uppercase;
+  color: var(--orange-text);
+}
+
+.events .eyebrow,
+.page-hero .eyebrow,
+.hero .eyebrow {
   color: var(--orange);
 }
 
@@ -105,12 +138,12 @@ textarea {
 
 .btn-outline:hover {
   background: white;
-  color: var(--ink);
+  color: var(--night);
 }
 
 .btn-dark {
-  background: var(--ink);
-  color: white;
+  background: var(--btn-dark-bg);
+  color: var(--btn-dark-fg);
 }
 
 .btn-dark:hover {
@@ -226,7 +259,7 @@ textarea {
   align-items: flex-end;
   padding: 160px 0 76px;
   overflow: hidden;
-  background: var(--ink);
+  background: var(--night);
 }
 
 .hero-bg {
@@ -336,7 +369,7 @@ textarea {
   align-items: flex-end;
   padding: 150px 0 56px;
   overflow: hidden;
-  background: linear-gradient(90deg, rgba(6, 14, 20, 0.94) 0%, rgba(6, 14, 20, 0.8) 100%), var(--ink);
+  background: linear-gradient(90deg, rgba(6, 14, 20, 0.94) 0%, rgba(6, 14, 20, 0.8) 100%), var(--night);
 }
 
 .page-hero-bg {
@@ -453,7 +486,7 @@ textarea {
 }
 
 .mission-card {
-  background: #f0eee9;
+  background: var(--surface-2);
   border-radius: 5px;
   padding: 28px;
   min-height: 145px;
@@ -463,7 +496,7 @@ textarea {
 
 .mission-card:hover {
   transform: translateX(-5px);
-  background: #ebe6dd;
+  background: var(--surface-3);
 }
 
 .mission-number {
@@ -488,7 +521,7 @@ textarea {
 
 /* EVENTS */
 .events {
-  background: var(--ink);
+  background: var(--night);
   color: white;
   padding: 92px 0 105px;
   position: relative;
@@ -562,7 +595,7 @@ textarea {
 }
 
 .event-card {
-  background: white;
+  background: var(--surface);
   color: var(--ink);
   border-radius: 7px;
   padding: 8px;
@@ -594,7 +627,7 @@ textarea {
 }
 
 .event-tag {
-  color: var(--orange);
+  color: var(--orange-text);
   font-weight: 800;
 }
 
@@ -613,7 +646,7 @@ textarea {
 .event-link {
   display: inline-block;
   margin-top: 14px;
-  color: var(--orange);
+  color: var(--orange-text);
   font-size: 11px;
   font-weight: 800;
 }
@@ -650,7 +683,7 @@ textarea {
   height: 120px;
   border: 1px solid var(--line);
   border-radius: 8px;
-  background: white;
+  background: var(--surface);
   display: grid;
   place-items: center;
   transition: 0.25s ease;
@@ -725,7 +758,7 @@ textarea {
 }
 
 .person {
-  background: white;
+  background: var(--surface);
   border-radius: 7px;
   overflow: hidden;
   transition: 0.25s ease;
@@ -785,7 +818,7 @@ textarea {
   overflow: hidden;
   border-radius: 5px;
   position: relative;
-  background: #ddd;
+  background: var(--line);
 }
 
 .gallery-grid .gallery-item:nth-child(1) {
@@ -829,7 +862,7 @@ textarea {
 
 /* NEWSLETTER */
 .newsletter {
-  background: #f7e8dc;
+  background: var(--news-bg);
   padding: 72px 0;
   position: relative;
   overflow: hidden;
@@ -851,7 +884,7 @@ textarea {
 .subscribe {
   display: flex;
   gap: 8px;
-  background: white;
+  background: var(--surface);
   padding: 6px;
   border-radius: 999px;
   box-shadow: 0 10px 30px rgba(100, 60, 30, 0.08);
@@ -883,7 +916,7 @@ textarea {
 }
 
 .contact-card {
-  background: #f0eee9;
+  background: var(--surface-2);
   border-radius: 5px;
   padding: 24px 28px;
 }
@@ -1300,7 +1333,7 @@ footer :focus-visible {
   font-weight: 700;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--orange);
+  color: var(--orange-text);
 }
 
 .event-facts dd {
@@ -1329,7 +1362,7 @@ footer :focus-visible {
 }
 
 .prose a {
-  color: var(--orange-dark);
+  color: var(--orange-text);
   text-decoration: underline;
 }
 

@@ -1,11 +1,13 @@
 "use client";
 
 import { useState } from "react";
+import { useToast } from "./Toast";
 
 type Status = "idle" | "sending" | "done" | "error";
 
 export default function NewsletterForm() {
   const [status, setStatus] = useState<Status>("idle");
+  const { toast } = useToast();
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -21,8 +23,10 @@ export default function NewsletterForm() {
       if (!res.ok) throw new Error();
       form.reset();
       setStatus("done");
+      toast("Subscribed — welcome to the list", "success");
     } catch {
       setStatus("error");
+      toast("Couldn't subscribe right now", "error");
     }
   }
 

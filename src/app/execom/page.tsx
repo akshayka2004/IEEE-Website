@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import PageHero from "@/components/PageHero";
+import TeamGrid from "@/components/TeamGrid";
 import { execom } from "@/lib/data";
 
 export const metadata: Metadata = {
   title: "Execom | IEEE Student Branch",
   description: "Meet the executive committee of the IEEE Student Branch at Saintgits College of Engineering.",
+  alternates: { canonical: "/execom" },
 };
 
 export default function ExecomPage() {
@@ -20,19 +21,10 @@ export default function ExecomPage() {
 
       <section className="execom">
         <div className="container">
-          <div className="people">
-            {execom.map((person) => (
-              <article className="person" key={person.name}>
-                <div className="person-photo">
-                  <Image src={person.image} alt={person.name} width={500} height={240} sizes="(max-width: 700px) 50vw, 25vw" />
-                </div>
-                <div className="person-info">
-                  <div className="person-name">{person.name}</div>
-                  <div className="person-role">{person.role}</div>
-                </div>
-              </article>
-            ))}
-          </div>
+          <p className="team-hint" data-reveal="up">
+            Select a team member to read more about their role.
+          </p>
+          <TeamGrid people={execom} />
         </div>
       </section>
     </main>

@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { contactEmail, socials } from "@/lib/site";
 
-export default function Footer() {
+export default function Footer({ hasNews = false }: { hasNews?: boolean }) {
   return (
     <footer>
       <div className="container">
@@ -25,12 +25,14 @@ export default function Footer() {
             <Link href="/about">About</Link>
             <Link href="/execom">Execom</Link>
             <Link href="/societies">Societies</Link>
+            <Link href="/join">Join the branch</Link>
           </div>
 
           <div className="footer-col">
             <h4>Activities</h4>
             <Link href="/events">Events</Link>
-            <Link href="/contact#newsletter">Newsletter</Link>
+            {hasNews && <Link href="/news">News</Link>}
+            <Link href="/newsletter">Newsletter</Link>
             <Link href="/gallery">Gallery</Link>
           </div>
 
@@ -41,6 +43,7 @@ export default function Footer() {
                 {s.label}
               </a>
             ))}
+            <Link href="/contact">Contact</Link>
             <a href={`mailto:${contactEmail}`}>Email</a>
           </div>
 

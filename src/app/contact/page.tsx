@@ -10,6 +10,8 @@ export const metadata: Metadata = {
   alternates: { canonical: "/contact" },
 };
 
+const MAP_QUERY = "Saintgits College of Engineering, Kottayam, Kerala";
+
 export default function ContactPage() {
   return (
     <main id="main">
@@ -22,7 +24,7 @@ export default function ContactPage() {
 
       <section className="contact">
         <div className="container contact-grid">
-          <div>
+          <div data-reveal="stagger">
             <div className="eyebrow">Get In Touch</div>
             <h2 className="section-title" style={{ fontSize: "clamp(32px, 3.2vw, 46px)", marginBottom: 24 }}>
               Send us a message.
@@ -30,23 +32,23 @@ export default function ContactPage() {
             <ContactForm />
           </div>
 
-          <div className="contact-cards">
-            <div className="contact-card">
+          <div className="contact-cards" data-reveal="stagger">
+            <div className="contact-card spot">
               <h3>Email</h3>
               <p>
                 <a href={`mailto:${contactEmail}`}>{contactEmail}</a>
               </p>
             </div>
-            <div className="contact-card">
+            <div className="contact-card spot">
               <h3>Address</h3>
               <p>Saintgits College of Engineering, Kottayam, Kerala, India</p>
             </div>
-            <div className="contact-card">
+            <div className="contact-card spot">
               <h3>Office Hours</h3>
               <p>Monday – Friday, 9:00 AM – 4:00 PM</p>
             </div>
             {socials.length > 0 && (
-              <div className="contact-card">
+              <div className="contact-card spot">
                 <h3>Follow Us</h3>
                 <p>
                   {socials.map((s, i) => (
@@ -62,11 +64,29 @@ export default function ContactPage() {
             )}
           </div>
         </div>
+
+        <div className="container map-wrap" data-reveal="up">
+          <iframe
+            title="Map showing Saintgits College of Engineering"
+            src={`https://www.google.com/maps?q=${encodeURIComponent(MAP_QUERY)}&output=embed`}
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+            allowFullScreen
+          />
+          <a
+            className="btn btn-dark map-directions"
+            href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(MAP_QUERY)}`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Get directions →
+          </a>
+        </div>
       </section>
 
       <section className="newsletter" id="newsletter">
         <div className="container newsletter-inner">
-          <div className="newsletter-copy">
+          <div className="newsletter-copy" data-reveal="stagger">
             <div className="eyebrow">Newsletter</div>
             <h2 className="section-title">IEEE SB Inside</h2>
             <p>Stories, achievements, events and opportunities delivered to your inbox.</p>

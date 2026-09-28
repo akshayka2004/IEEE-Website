@@ -22,7 +22,8 @@ export default function PrivacyPage() {
           <h2>Information we collect</h2>
           <p>
             We only collect information you choose to submit: your name, email address and message through the contact
-            form, and your email address if you subscribe to the newsletter.
+            form; your email address if you subscribe to the newsletter; your name, email, department and year if you
+            register for an event or ask to join the branch (along with any interests or comments you add).
           </p>
           <h2>How we use it</h2>
           <p>
@@ -31,7 +32,11 @@ export default function PrivacyPage() {
             marketing.
           </p>
           <h2>Cookies and analytics</h2>
-          <p>This website does not set tracking cookies.</p>
+          <p>
+            This website does not set tracking cookies. Your theme preference (light or dark) and whether you dismissed
+            an announcement are stored in your browser only. If cookie-free analytics is enabled, it records anonymous
+            page-view counts and does not track individuals.
+          </p>
           <h2>Your choices</h2>
           <p>
             To access, correct or delete the information you have sent us, email{" "}

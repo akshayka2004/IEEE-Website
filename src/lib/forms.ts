@@ -12,7 +12,7 @@ export function cleanText(value: unknown, max: number): string | null {
   return trimmed.length > 0 && trimmed.length <= max ? trimmed : null;
 }
 
-export async function deliver(type: "contact" | "newsletter", payload: Record<string, string>) {
+export async function deliver(type: "contact" | "newsletter" | "registration" | "join", payload: Record<string, string>) {
   const url = process.env.FORMS_WEBHOOK_URL;
 
   if (!url) {

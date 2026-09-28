@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import PageHero from "@/components/PageHero";
-import EventsSection from "@/components/EventsSection";
+import EventsExplorer from "@/components/EventsExplorer";
+import { getEvents } from "@/lib/events";
 
 export const metadata: Metadata = {
   title: "Events | IEEE Student Branch",
@@ -18,7 +19,7 @@ export default function EventsPage() {
         image="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=2200&q=85"
       />
 
-      <EventsSection hideTitle />
+      <EventsExplorer events={getEvents()} />
     </main>
   );
 }

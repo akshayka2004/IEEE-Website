@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import PageHero from "@/components/PageHero";
+import GalleryGrid from "@/components/GalleryGrid";
 import { gallery } from "@/lib/data";
 
 export const metadata: Metadata = {
   title: "Gallery | IEEE Student Branch",
   description: "Moments from IEEE Student Branch events, workshops and community activities.",
+  alternates: { canonical: "/gallery" },
 };
 
 export default function GalleryPage() {
@@ -20,14 +21,7 @@ export default function GalleryPage() {
 
       <section className="gallery">
         <div className="container">
-          <div className="gallery-grid-full">
-            {gallery.map((item, i) => (
-              <div className="gallery-item" key={i}>
-                <Image src={item.image} alt={item.caption} width={900} height={220} sizes="(max-width: 700px) 100vw, (max-width: 1000px) 50vw, 25vw" />
-                <div className="gallery-caption">{item.caption}</div>
-              </div>
-            ))}
-          </div>
+          <GalleryGrid photos={gallery} />
         </div>
       </section>
     </main>

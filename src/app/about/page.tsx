@@ -1,14 +1,23 @@
 import type { Metadata } from "next";
-import Image from "next/image";
+import Link from "next/link";
 import PageHero from "@/components/PageHero";
+import PurposeTabs from "@/components/PurposeTabs";
+import Timeline from "@/components/Timeline";
+import Achievements from "@/components/Achievements";
+import Img from "@/components/Img";
 import { missions } from "@/lib/data";
+import { getAchievements, getTimeline } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "About | IEEE Student Branch",
   description: "About the IEEE Student Branch at Saintgits College of Engineering.",
+  alternates: { canonical: "/about" },
 };
 
 export default function AboutPage() {
+  const timeline = getTimeline();
+  const achievements = getAchievements();
+
   return (
     <main id="main">
       <PageHero
@@ -20,7 +29,7 @@ export default function AboutPage() {
 
       <section className="about">
         <div className="container about-grid">
-          <div className="about-copy">
+          <div className="about-copy" data-reveal="stagger">
             <div className="eyebrow">Who We Are</div>
             <h2 className="section-title">Learning beyond the classroom.</h2>
             <p>
@@ -31,13 +40,13 @@ export default function AboutPage() {
             </p>
             <p>
               Founded to bridge the gap between academic learning and industry practice, our branch
-              has grown into a thriving hub of seven societies, each driving projects and events in
+              has grown into a thriving hub of societies, each driving projects and events in
               its own domain — from computing and robotics to power systems and signal processing.
             </p>
           </div>
 
-          <div className="about-image">
-            <Image
+          <div className="about-image shimmer" data-reveal="up">
+            <Img
               src="https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=1200&q=85"
               alt="Students collaborating on a project"
               width={1200}
@@ -46,9 +55,9 @@ export default function AboutPage() {
             />
           </div>
 
-          <div className="about-cards">
+          <div className="about-cards" data-reveal="stagger">
             {missions.slice(0, 2).map((m) => (
-              <article className="mission-card" key={m.number}>
+              <article className="mission-card spot" key={m.number}>
                 <div className="mission-number">{m.number}</div>
                 <h3>{m.title}</h3>
                 <p>{m.desc}</p>
@@ -58,15 +67,24 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="about" style={{ paddingTop: 0 }}>
-        <div className="container about-grid" style={{ gridTemplateColumns: "1fr 1fr" }}>
-          {missions.slice(2).map((m) => (
-            <article className="mission-card" key={m.number}>
-              <div className="mission-number">{m.number}</div>
-              <h3>{m.title}</h3>
-              <p>{m.desc}</p>
-            </article>
-          ))}
+      <PurposeTabs />
+      <Timeline items={timeline} />
+      <Achievements items={achievements} />
+
+      <section className="cta-band">
+        <div className="container cta-inner" data-reveal="stagger">
+          <div>
+            <div className="eyebrow">Get involved</div>
+            <h2 className="section-title">Ready to build with us?</h2>
+          </div>
+          <div className="cta-actions">
+            <Link href="/join" className="btn btn-primary">
+              Join the branch →
+            </Link>
+            <Link href="/events" className="btn btn-dark">
+              See upcoming events
+            </Link>
+          </div>
         </div>
       </section>
     </main>
