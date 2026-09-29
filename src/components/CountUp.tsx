@@ -1,19 +1,15 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 
 export default function CountUp({ target, suffix = "" }: { target: number; suffix?: string }) {
-  const [value, setValue] = useState(0);
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
 
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      const id = requestAnimationFrame(() => setValue(target));
-      return () => cancelAnimationFrame(id);
-    }
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
     const observer = new IntersectionObserver(
       (entries, obs) => {
@@ -24,8 +20,9 @@ export default function CountUp({ target, suffix = "" }: { target: number; suffi
 
           function tick(now: number) {
             const progress = Math.min((now - start) / duration, 1);
-            setValue(Math.floor(progress * target));
+            el!.textContent = `${Math.floor(progress * target)}${suffix}`;
             if (progress < 1) requestAnimationFrame(tick);
+            else el!.textContent = `${target}${suffix}`;
           }
 
           requestAnimationFrame(tick);
@@ -37,11 +34,11 @@ export default function CountUp({ target, suffix = "" }: { target: number; suffi
 
     observer.observe(el);
     return () => observer.disconnect();
-  }, [target]);
+  }, [target, suffix]);
 
   return (
     <div className="stat-number" ref={ref}>
-      {value}
+      {target}
       {suffix}
     </div>
   );

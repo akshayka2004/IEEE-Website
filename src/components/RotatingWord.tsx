@@ -16,11 +16,8 @@ export default function RotatingWord() {
   }, []);
 
   return (
-    <>
-      <span className="sr-only">tomorrow.</span>
-      <span className="rotating-word" aria-hidden="true" key={i}>
-        {WORDS[i]}
-      </span>
-    </>
+    <span className="rotating-word" key={i}>
+      {WORDS[i]}
+    </span>
   );
 }
