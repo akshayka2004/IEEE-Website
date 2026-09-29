@@ -1,11 +1,15 @@
-import { eventDetails, rawEvents, societies, stats, type RawEvent } from "./data";
+import { eventDetails, rawEvents, societies, stats, type GalleryCategory, type RawEvent } from "./data";
 import { siteUrl } from "./site";
 
 const MONTHS = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
 const MONTHS_LONG = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
+/** open: >7 days out · soon: within 7 days · live: today · completed: already happened */
+export type EventPhase = "open" | "soon" | "live" | "completed";
+
 export type EventItem = RawEvent & {
   status: "upcoming" | "past";
+  phase: EventPhase;
   /** e.g. "24 OCT" */
   dateLabel: string;
   /** e.g. "24 October 2026" */
@@ -21,11 +25,19 @@ export function todayIST(): string {
   return new Date().toLocaleDateString("en-CA", { timeZone: "Asia/Kolkata" });
 }
 
+function phaseOf(startsAt: string, today: string): EventPhase {
+  if (startsAt < today) return "completed";
+  if (startsAt === today) return "live";
+  const daysUntil = Math.round((Date.parse(startsAt) - Date.parse(today)) / 86400000);
+  return daysUntil <= 7 ? "soon" : "open";
+}
+
 function decorate(e: RawEvent, today: string): EventItem {
   const [y, m, d] = e.startsAt.split("-").map(Number);
   return {
     ...e,
     status: e.startsAt >= today ? "upcoming" : "past",
+    phase: phaseOf(e.startsAt, today),
     dateLabel: `${String(d).padStart(2, "0")} ${MONTHS[m - 1]}`,
     dateLong: `${d} ${MONTHS_LONG[m - 1]} ${y}`,
     startsAtIso: `${e.startsAt}T00:00:00+05:30`,
@@ -33,6 +45,22 @@ function decorate(e: RawEvent, today: string): EventItem {
     year: y,
     day: d,
   };
+}
+
+const TAG_TO_GALLERY_CATEGORY: Record<string, GalleryCategory> = {
+  Hackathon: "Competitions",
+  Workshop: "Workshops",
+  Bootcamp: "Workshops",
+  "Technical Talk": "Events",
+  Panel: "Events",
+  Seminar: "Events",
+  "Site Visit": "Events",
+  Symposium: "Events",
+};
+
+/** Best-effort mapping from an event's tag to the closest gallery filter, used to link "View photos" to a pre-filtered gallery. */
+export function galleryCategoryFor(tag: string): GalleryCategory {
+  return TAG_TO_GALLERY_CATEGORY[tag] ?? "Events";
 }
 
 /** Upcoming events (soonest first) followed by past events (most recent first). */

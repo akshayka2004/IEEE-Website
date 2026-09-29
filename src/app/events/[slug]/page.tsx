@@ -7,8 +7,9 @@ import Countdown from "@/components/Countdown";
 import RegisterForm from "@/components/RegisterForm";
 import ShareButtons from "@/components/ShareButtons";
 import EventCard from "@/components/EventCard";
+import EventStatus from "@/components/EventStatus";
 import { rawEvents, eventDetails, societies } from "@/lib/data";
-import { getEvent, getEvents, googleCalendarUrl } from "@/lib/events";
+import { galleryCategoryFor, getEvent, getEvents, googleCalendarUrl } from "@/lib/events";
 import { siteUrl } from "@/lib/site";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -69,6 +70,7 @@ export default async function EventDetailPage({ params }: Props) {
             </div>
 
             <div className="about-copy">
+              <EventStatus phase={event.phase} className="event-status-standalone" />
               <div className="eyebrow">{upcoming ? "Upcoming event" : "Past event"}</div>
               <h2 className="section-title" style={{ fontSize: "clamp(30px, 3vw, 44px)" }}>
                 About this event
@@ -114,6 +116,11 @@ export default async function EventDetailPage({ params }: Props) {
                       Download .ics
                     </a>
                   </>
+                )}
+                {!upcoming && (
+                  <Link href={`/gallery?category=${encodeURIComponent(galleryCategoryFor(event.tag))}`} className="btn btn-primary">
+                    View Photos →
+                  </Link>
                 )}
                 <Link href="/events" className="btn btn-ghost">
                   ← All events

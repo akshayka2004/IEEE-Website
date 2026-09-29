@@ -4,6 +4,9 @@ export const siteDescription =
   "IEEE Student Branch at Saintgits College of Engineering — a community of curious minds building technology through workshops, talks, hackathons and societies.";
 export const contactEmail = "ieee@saintgits.org";
 
+export const contactPurposes = ["Membership", "Event", "Partnership", "Society", "Project", "Other"] as const;
+export type ContactPurpose = (typeof contactPurposes)[number];
+
 export const socials = [
   { label: "Instagram", href: process.env.NEXT_PUBLIC_INSTAGRAM_URL },
   { label: "LinkedIn", href: process.env.NEXT_PUBLIC_LINKEDIN_URL },

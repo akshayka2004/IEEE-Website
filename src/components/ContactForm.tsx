@@ -2,11 +2,13 @@
 
 import { useState } from "react";
 import { useToast } from "./Toast";
+import { contactPurposes, type ContactPurpose } from "@/lib/site";
 
 type Status = "idle" | "sending" | "done" | "error";
 
 export default function ContactForm() {
   const [status, setStatus] = useState<Status>("idle");
+  const [purpose, setPurpose] = useState<ContactPurpose>("Membership");
   const { toast } = useToast();
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -22,6 +24,7 @@ export default function ContactForm() {
           name: data.get("name"),
           email: data.get("email"),
           message: data.get("message"),
+          purpose,
           website: data.get("website"),
         }),
       });
@@ -45,6 +48,18 @@ export default function ContactForm() {
 
   return (
     <form className="contact-form" onSubmit={handleSubmit}>
+      <fieldset className="purpose-field">
+        <legend>I want to contact IEEE about</legend>
+        <div className="radio-row">
+          {contactPurposes.map((p) => (
+            <label key={p} className={`radio-chip${purpose === p ? " is-on" : ""}`}>
+              <input type="radio" name="purpose" value={p} checked={purpose === p} onChange={() => setPurpose(p)} />
+              <span>{p}</span>
+            </label>
+          ))}
+        </div>
+      </fieldset>
+
       <label className="sr-only" htmlFor="contact-name">
         Your name
       </label>

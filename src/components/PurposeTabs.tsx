@@ -1,25 +1,41 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { missions } from "@/lib/data";
 
 export default function PurposeTabs() {
   const [active, setActive] = useState(0);
-  const refs = useRef<(HTMLButtonElement | null)[]>([]);
+  const blockRefs = useRef<(HTMLElement | null)[]>([]);
+  const suppressObserver = useRef(false);
 
-  function onKeyDown(e: React.KeyboardEvent, i: number) {
-    let next = i;
-    if (e.key === "ArrowRight" || e.key === "ArrowDown") next = (i + 1) % missions.length;
-    else if (e.key === "ArrowLeft" || e.key === "ArrowUp") next = (i - 1 + missions.length) % missions.length;
-    else if (e.key === "Home") next = 0;
-    else if (e.key === "End") next = missions.length - 1;
-    else return;
-    e.preventDefault();
-    setActive(next);
-    refs.current[next]?.focus();
+  useEffect(() => {
+    const els = blockRefs.current.filter((el): el is HTMLElement => Boolean(el));
+    if (els.length === 0) return;
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (suppressObserver.current) return;
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          const idx = els.indexOf(entry.target as HTMLElement);
+          if (idx !== -1) setActive(idx);
+        });
+      },
+      { rootMargin: "-42% 0px -42% 0px", threshold: 0 }
+    );
+
+    els.forEach((el) => io.observe(el));
+    return () => io.disconnect();
+  }, []);
+
+  function goTo(i: number) {
+    setActive(i);
+    suppressObserver.current = true;
+    blockRefs.current[i]?.scrollIntoView({ behavior: "smooth", block: "center" });
+    window.setTimeout(() => {
+      suppressObserver.current = false;
+    }, 700);
   }
-
-  const current = missions[active];
 
   return (
     <section className="purpose" id="purpose" aria-labelledby="purpose-title">
@@ -31,22 +47,18 @@ export default function PurposeTabs() {
           </h2>
         </div>
 
-        <div className="purpose-layout" data-reveal="up">
-          <div className="purpose-tabs" role="tablist" aria-label="Our purpose" aria-orientation="vertical">
+        <div className="story-layout" data-reveal="up">
+          <div className="story-nav" role="tablist" aria-label="Our purpose" aria-orientation="vertical">
             {missions.map((m, i) => (
               <button
                 key={m.id}
-                ref={(el) => {
-                  refs.current[i] = el;
-                }}
+                id={`story-tab-${m.id}`}
                 role="tab"
-                id={`tab-${m.id}`}
                 aria-selected={i === active}
-                aria-controls={`panel-${m.id}`}
+                aria-controls={`story-${m.id}`}
                 tabIndex={i === active ? 0 : -1}
                 className={i === active ? "is-active" : ""}
-                onClick={() => setActive(i)}
-                onKeyDown={(e) => onKeyDown(e, i)}
+                onClick={() => goTo(i)}
               >
                 <span className="purpose-num">{m.number}</span>
                 {m.title}
@@ -54,14 +66,27 @@ export default function PurposeTabs() {
             ))}
           </div>
 
-          <div className="purpose-panel" role="tabpanel" id={`panel-${current.id}`} aria-labelledby={`tab-${current.id}`} key={current.id}>
-            <h3>{current.title}</h3>
-            <p>{current.desc}</p>
-            <ul>
-              {current.points.map((pt) => (
-                <li key={pt}>{pt}</li>
-              ))}
-            </ul>
+          <div className="story-blocks">
+            {missions.map((m, i) => (
+              <article
+                key={m.id}
+                id={`story-${m.id}`}
+                ref={(el) => {
+                  blockRefs.current[i] = el;
+                }}
+                role="tabpanel"
+                aria-labelledby={`story-tab-${m.id}`}
+                className={`story-block${i === active ? " is-active" : ""}`}
+              >
+                <h3>{m.title}</h3>
+                <p>{m.desc}</p>
+                <ul>
+                  {m.points.map((pt) => (
+                    <li key={pt}>{pt}</li>
+                  ))}
+                </ul>
+              </article>
+            ))}
           </div>
         </div>
       </div>

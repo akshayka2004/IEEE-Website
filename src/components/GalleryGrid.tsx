@@ -6,9 +6,9 @@ import Img from "./Img";
 import Modal from "./Modal";
 import type { GalleryPhoto } from "@/lib/data";
 
-export default function GalleryGrid({ photos }: { photos: GalleryPhoto[] }) {
+export default function GalleryGrid({ photos, initialCategory = "All" }: { photos: GalleryPhoto[]; initialCategory?: string }) {
   const categories = useMemo(() => ["All", ...Array.from(new Set(photos.map((p) => p.category)))], [photos]);
-  const [category, setCategory] = useState("All");
+  const [category, setCategory] = useState(initialCategory);
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const touchX = useRef<number | null>(null);
 

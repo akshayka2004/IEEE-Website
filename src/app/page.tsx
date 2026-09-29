@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import CountUp from "@/components/CountUp";
 import EventsSection from "@/components/EventsSection";
-import SocietiesMarquee from "@/components/SocietiesMarquee";
+import SocietySelector from "@/components/SocietySelector";
 import NewsletterForm from "@/components/NewsletterForm";
 import RotatingWord from "@/components/RotatingWord";
 import TeamGrid from "@/components/TeamGrid";
@@ -150,7 +150,7 @@ export default function Home() {
 
       <EventsSection events={events} limit={3} />
 
-      <SocietiesMarquee />
+      <SocietySelector events={events} />
 
       {/* EXECOM */}
       <section className="execom" id="execom">

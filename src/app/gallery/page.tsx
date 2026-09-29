@@ -9,7 +9,12 @@ export const metadata: Metadata = {
   alternates: { canonical: "/gallery" },
 };
 
-export default function GalleryPage() {
+const CATEGORIES = new Set(gallery.map((p) => p.category));
+
+export default async function GalleryPage({ searchParams }: { searchParams: Promise<{ category?: string }> }) {
+  const { category } = await searchParams;
+  const initialCategory = category && CATEGORIES.has(category as (typeof gallery)[number]["category"]) ? category : "All";
+
   return (
     <main id="main">
       <PageHero
@@ -21,7 +26,7 @@ export default function GalleryPage() {
 
       <section className="gallery">
         <div className="container">
-          <GalleryGrid photos={gallery} />
+          <GalleryGrid photos={gallery} initialCategory={initialCategory} />
         </div>
       </section>
     </main>
