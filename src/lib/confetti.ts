@@ -1,4 +1,4 @@
-const COLORS = ["#f26a21", "#ffb27a", "#f5f0e8", "#111820", "#7cc576"];
+const COLORS = ["#006699", "#3399cc", "#e6f2f8", "#111820", "#004b73"];
 
 export function confettiBurst(origin?: Element | null) {
   if (typeof window === "undefined") return;

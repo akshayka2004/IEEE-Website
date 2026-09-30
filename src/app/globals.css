@@ -1,25 +1,25 @@
 :root {
   color-scheme: light;
-  --night: #111820;
+  --night: #0b141b;
   --ink: #111820;
   --ink-2: #17232d;
-  --cream: #f5f0e8;
+  --cream: #f4f7fa;
   --paper: #fffdf8;
   --surface: #ffffff;
   --surface-2: #f0eee9;
   --surface-3: #ebe6dd;
-  --news-bg: #f7e8dc;
-  --orange: #f26a21;
-  --orange-dark: #d95413;
-  --orange-text: #c2410c;
+  --news-bg: #e6f2f8;
+  --orange: #006699; /* IEEE Official Blue */
+  --orange-dark: #004b73; /* IEEE Dark Blue */
+  --orange-text: #005580; /* IEEE Accent Text Blue */
   --muted: #69747d;
   --line: #ddd7ce;
   --white: #ffffff;
-  --btn-dark-bg: #111820;
+  --btn-dark-bg: #006699;
   --btn-dark-fg: #ffffff;
   --max: 1240px;
   --radius: 18px;
-  --shadow: 0 16px 40px rgba(17, 24, 32, 0.1);
+  --shadow: 0 16px 40px rgba(0, 102, 153, 0.12);
 }
 
 :root[data-theme="dark"] {
@@ -31,12 +31,12 @@
   --surface: #17232d;
   --surface-2: #1b2934;
   --surface-3: #233441;
-  --news-bg: #1d1712;
-  --orange-text: #ff9a61;
+  --news-bg: #0d2436;
+  --orange-text: #38bdf8;
   --muted: #9aa5ad;
   --line: #26323a;
-  --btn-dark-bg: #f2efe9;
-  --btn-dark-fg: #111820;
+  --btn-dark-bg: #006699;
+  --btn-dark-fg: #ffffff;
   --shadow: 0 16px 40px rgba(0, 0, 0, 0.45);
 }
 
@@ -220,7 +220,7 @@ textarea {
 .nav-links a:hover,
 .nav-links a.active {
   opacity: 1;
-  color: #ff9a61;
+  color: var(--orange-text);
 }
 
 .nav-join {
@@ -309,14 +309,17 @@ textarea {
 .hero h1 {
   font-family: var(--font-playfair), serif;
   font-size: clamp(64px, 8vw, 112px);
-  line-height: 0.82;
-  letter-spacing: -0.055em;
-  max-width: 760px;
+  line-height: 1.08;
+  letter-spacing: -0.025em;
+  max-width: 820px;
+  padding: 0.12em 0;
+  overflow: visible;
 }
 
 .hero h1 em {
   color: var(--orange);
   font-style: italic;
+  padding-right: 0.12em;
 }
 
 .hero-desc {
@@ -394,8 +397,10 @@ textarea {
 .page-hero h1 {
   font-family: var(--font-playfair), serif;
   font-size: clamp(44px, 5.5vw, 74px);
-  line-height: 0.98;
-  letter-spacing: -0.045em;
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+  padding: 0.1em 0;
+  overflow: visible;
 }
 
 .page-hero p {
@@ -1262,7 +1267,7 @@ footer {
 .nav :focus-visible,
 .events :focus-visible,
 footer :focus-visible {
-  outline-color: #ff9a61;
+  outline-color: var(--orange-text);
 }
 
 .subscribe:focus-within {

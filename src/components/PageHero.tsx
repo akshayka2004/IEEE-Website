@@ -18,7 +18,7 @@ export default function PageHero({
         <Image src={image} alt="" fill sizes="100vw" priority style={{ objectFit: "cover" }} />
       </div>
       <div className="container page-hero-content">
-        <div className="eyebrow" style={{ color: "#ff9a61" }}>
+        <div className="eyebrow">
           {kicker}
         </div>
         <h1 className="split-heading">

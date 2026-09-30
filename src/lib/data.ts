@@ -161,18 +161,111 @@ export type Person = {
   role: string;
   image: string;
   bio: string;
+  department?: string;
+  email?: string;
   linkedin?: string;
+  portfolio?: string;
+  github?: string;
+  ieeeId?: string;
 };
 
 export const execom: Person[] = [
-  { name: "Adarsh N", role: "Chair", image: "https://i.pravatar.cc/500?img=12", bio: "Sets the direction of the branch, represents it to IEEE and the college, and coordinates the executive committee." },
-  { name: "Meera S", role: "Vice Chair", image: "https://i.pravatar.cc/500?img=47", bio: "Supports the Chair, oversees society activity and steps in to lead when the Chair is unavailable." },
-  { name: "Rohan P", role: "Secretary", image: "https://i.pravatar.cc/500?img=11", bio: "Keeps records, minutes and official communication so the branch runs smoothly and transparently." },
-  { name: "Diya M", role: "Treasurer", image: "https://i.pravatar.cc/500?img=44", bio: "Manages the branch budget, event expenses and financial reporting." },
-  { name: "Karthik V", role: "Webmaster", image: "https://i.pravatar.cc/500?img=13", bio: "Maintains this website and the branch's digital presence." },
-  { name: "Anjali R", role: "Events Lead", image: "https://i.pravatar.cc/500?img=48", bio: "Plans and runs workshops, talks and competitions from first idea to final feedback." },
-  { name: "Nikhil S", role: "Publicity Lead", image: "https://i.pravatar.cc/500?img=14", bio: "Spreads the word about branch activities across campus and social channels." },
-  { name: "Sruthi K", role: "Design Lead", image: "https://i.pravatar.cc/500?img=45", bio: "Creates posters, banners and visual identity for every branch event." },
+  {
+    name: "Adarsh N",
+    role: "Chair",
+    image: "https://i.pravatar.cc/500?img=12",
+    bio: "Sets the direction of the branch, represents it to IEEE and the college, and coordinates the executive committee.",
+    department: "Computer Science & Engineering",
+    email: "adarsh.n@ieee.org",
+    linkedin: "https://linkedin.com/in/adarsh-n",
+    portfolio: "https://adarshn.dev",
+    github: "https://github.com/adarshn",
+    ieeeId: "IEEE-98741023",
+  },
+  {
+    name: "Meera S",
+    role: "Vice Chair",
+    image: "https://i.pravatar.cc/500?img=47",
+    bio: "Supports the Chair, oversees society activity and steps in to lead when the Chair is unavailable.",
+    department: "Electronics & Communication",
+    email: "meera.s@ieee.org",
+    linkedin: "https://linkedin.com/in/meera-s",
+    portfolio: "https://meeras.design",
+    github: "https://github.com/meeras",
+    ieeeId: "IEEE-98741024",
+  },
+  {
+    name: "Rohan P",
+    role: "Secretary",
+    image: "https://i.pravatar.cc/500?img=11",
+    bio: "Keeps records, minutes and official communication so the branch runs smoothly and transparently.",
+    department: "Electrical & Electronics",
+    email: "rohan.p@ieee.org",
+    linkedin: "https://linkedin.com/in/rohan-p",
+    portfolio: "https://rohanp.me",
+    github: "https://github.com/rohanp",
+    ieeeId: "IEEE-98741025",
+  },
+  {
+    name: "Diya M",
+    role: "Treasurer",
+    image: "https://i.pravatar.cc/500?img=44",
+    bio: "Manages the branch budget, event expenses and financial reporting.",
+    department: "Computer Science & Engineering",
+    email: "diya.m@ieee.org",
+    linkedin: "https://linkedin.com/in/diya-m",
+    portfolio: "https://diyam.dev",
+    github: "https://github.com/diyam",
+    ieeeId: "IEEE-98741026",
+  },
+  {
+    name: "Karthik V",
+    role: "Webmaster",
+    image: "https://i.pravatar.cc/500?img=13",
+    bio: "Maintains this website and the branch's digital presence.",
+    department: "Computer Science & Engineering",
+    email: "karthik.v@ieee.org",
+    linkedin: "https://linkedin.com/in/karthik-v",
+    portfolio: "https://karthikv.dev",
+    github: "https://github.com/karthikv",
+    ieeeId: "IEEE-98741027",
+  },
+  {
+    name: "Anjali R",
+    role: "Events Lead",
+    image: "https://i.pravatar.cc/500?img=48",
+    bio: "Plans and runs workshops, talks and competitions from first idea to final feedback.",
+    department: "Mechanical Engineering",
+    email: "anjali.r@ieee.org",
+    linkedin: "https://linkedin.com/in/anjali-r",
+    portfolio: "https://anjalir.me",
+    github: "https://github.com/anjalir",
+    ieeeId: "IEEE-98741028",
+  },
+  {
+    name: "Nikhil S",
+    role: "Publicity Lead",
+    image: "https://i.pravatar.cc/500?img=14",
+    bio: "Spreads the word about branch activities across campus and social channels.",
+    department: "Electronics & Communication",
+    email: "nikhil.s@ieee.org",
+    linkedin: "https://linkedin.com/in/nikhil-s",
+    portfolio: "https://nikhils.dev",
+    github: "https://github.com/nikhils",
+    ieeeId: "IEEE-98741029",
+  },
+  {
+    name: "Sruthi K",
+    role: "Design Lead",
+    image: "https://i.pravatar.cc/500?img=45",
+    bio: "Creates posters, banners and visual identity for every branch event.",
+    department: "Computer Science & Engineering",
+    email: "sruthi.k@ieee.org",
+    linkedin: "https://linkedin.com/in/sruthi-k",
+    portfolio: "https://sruthik.design",
+    github: "https://github.com/sruthik",
+    ieeeId: "IEEE-98741030",
+  },
 ];
 
 export type Society = {
