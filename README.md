@@ -4,7 +4,11 @@ Next.js 16 (App Router, TypeScript) website for the IEEE Student Branch.
 
 ## Pages
 
-`/` · `/about` · `/events` · `/events/[slug]` · `/execom` · `/societies` · `/societies/[slug]` · `/gallery` · `/news` · `/news/[slug]` · `/join` · `/newsletter` · `/contact` · `/privacy` · `/terms`
+**Live:** `/` · `/about` · `/execom`
+
+**Built but hidden:** `/events` (+ detail) · `/societies` (+ detail) · `/gallery` · `/news` · `/newsletter` · `/join` · `/contact` · `/privacy` · `/terms`
+
+Hidden routes redirect to the home page and disappear from navigation, footer, search, sitemap and home-page sections. To re-launch one, delete its line from `HIDDEN_ROUTES` in `src/lib/pages.ts` and redeploy — no other change needed.
 
 ## Features
 
@@ -37,6 +41,7 @@ Copy `.env.example` to `.env.local` (or set these in your host):
 | --- | --- |
 | `NEXT_PUBLIC_SITE_URL` | Public URL — canonical links, sitemap, Open Graph |
 | `FORMS_WEBHOOK_URL` | Contact, newsletter, event-registration and join submissions are POSTed here as JSON (`type`: `contact` / `newsletter` / `registration` / `join`). **Required in production** — without it the forms return an error instead of silently dropping messages. Point it at Google Apps Script, Formspree, Zapier/Make, etc. to store rows, send confirmation emails or export attendee lists |
+| `NEXT_PUBLIC_CONTACT_EMAIL` | Public contact email. Not shown anywhere until set |
 | `NEXT_PUBLIC_INSTAGRAM_URL`, `NEXT_PUBLIC_LINKEDIN_URL`, `NEXT_PUBLIC_YOUTUBE_URL` | Social links; each is hidden until set |
 | `NEXT_PUBLIC_PLAUSIBLE_DOMAIN` | Enables cookie-free Plausible analytics |
 | `NEXT_PUBLIC_YOUTUBE_FEATURED_ID` | Shows a featured video on the home page |

@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import { HIDDEN_ROUTES } from "./src/lib/pages";
 
 const securityHeaders = [
   { key: "X-Content-Type-Options", value: "nosniff" },
@@ -11,13 +12,16 @@ const securityHeaders = [
 const nextConfig: NextConfig = {
   poweredByHeader: false,
   images: {
-    remotePatterns: [
-      { protocol: "https", hostname: "images.unsplash.com" },
-      { protocol: "https", hostname: "i.pravatar.cc" },
-    ],
+    remotePatterns: [{ protocol: "https", hostname: "images.unsplash.com" }],
   },
   async headers() {
     return [{ source: "/:path*", headers: securityHeaders }];
+  },
+  async redirects() {
+    return HIDDEN_ROUTES.flatMap((route) => [
+      { source: route, destination: "/", permanent: false },
+      { source: `${route}/:path*`, destination: "/", permanent: false },
+    ]);
   },
 };
 

@@ -6,6 +6,8 @@ import Timeline from "@/components/Timeline";
 import Achievements from "@/components/Achievements";
 import SectionDots from "@/components/SectionDots";
 import Img from "@/components/Img";
+import JoinLink from "@/components/JoinLink";
+import { isLive } from "@/lib/pages";
 import { missions } from "@/lib/data";
 import { getAchievements, getTimeline } from "@/lib/content";
 
@@ -89,12 +91,16 @@ export default function AboutPage() {
             <h2 className="section-title">Ready to build with us?</h2>
           </div>
           <div className="cta-actions">
-            <Link href="/join" className="btn btn-primary">
-              Join the branch →
-            </Link>
-            <Link href="/events" className="btn btn-dark">
-              See upcoming events
-            </Link>
+            <JoinLink className="btn btn-primary">Join IEEE →</JoinLink>
+            {isLive("/events") ? (
+              <Link href="/events" className="btn btn-dark">
+                See upcoming events
+              </Link>
+            ) : (
+              <Link href="/execom" className="btn btn-dark">
+                Meet the team
+              </Link>
+            )}
           </div>
         </div>
       </section>

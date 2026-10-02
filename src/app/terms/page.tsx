@@ -31,7 +31,13 @@ export default function TermsPage() {
           </p>
           <h2>Contact</h2>
           <p>
-            Questions about these terms? Email <a href={`mailto:${contactEmail}`}>{contactEmail}</a>.
+            Questions about these terms? Contact the branch
+            {contactEmail ? (
+              <>
+                {" "}at <a href={`mailto:${contactEmail}`}>{contactEmail}</a>
+              </>
+            ) : null}
+            .
           </p>
         </div>
       </section>

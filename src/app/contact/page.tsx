@@ -33,12 +33,14 @@ export default function ContactPage() {
           </div>
 
           <div className="contact-cards" data-reveal="stagger">
-            <div className="contact-card spot">
-              <h3>Email</h3>
-              <p>
-                <a href={`mailto:${contactEmail}`}>{contactEmail}</a>
-              </p>
-            </div>
+            {contactEmail && (
+              <div className="contact-card spot">
+                <h3>Email</h3>
+                <p>
+                  <a href={`mailto:${contactEmail}`}>{contactEmail}</a>
+                </p>
+              </div>
+            )}
             <div className="contact-card spot">
               <h3>Address</h3>
               <p>Saintgits College of Engineering, Kottayam, Kerala, India</p>

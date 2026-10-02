@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import ThemeToggle from "./ThemeToggle";
+import JoinLink from "./JoinLink";
 import { OPEN_SEARCH_EVENT } from "./SearchPalette";
 
 export type NavLink = { href: string; label: string };
@@ -116,9 +117,7 @@ export default function Navbar({ links, announcement }: { links: NavLink[]; anno
               {link.label}
             </Link>
           ))}
-          <Link className="nav-join" href="/join">
-            Join IEEE →
-          </Link>
+          <JoinLink className="nav-join">Join IEEE →</JoinLink>
         </nav>
 
         <div className="nav-tools">

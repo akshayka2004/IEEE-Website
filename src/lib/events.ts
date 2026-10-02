@@ -1,4 +1,4 @@
-import { eventDetails, rawEvents, societies, stats, type GalleryCategory, type RawEvent } from "./data";
+import { eventDetails, rawEvents, stats, type GalleryCategory, type RawEvent } from "./data";
 import { siteUrl } from "./site";
 
 const MONTHS = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
@@ -81,7 +81,7 @@ export function getNextEvent(): EventItem | undefined {
 }
 
 export function getStats() {
-  return stats.map((s) => (s.label === "Societies" ? { ...s, count: societies.length } : s));
+  return stats;
 }
 
 const pad = (n: number) => String(n).padStart(2, "0");

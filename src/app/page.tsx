@@ -10,7 +10,9 @@ import Testimonials from "@/components/Testimonials";
 import VideoFeature from "@/components/VideoFeature";
 import NewsCard from "@/components/NewsCard";
 import Img from "@/components/Img";
-import { execom, missions, gallery } from "@/lib/data";
+import JoinLink from "@/components/JoinLink";
+import { officeBearers, missions, gallery } from "@/lib/data";
+import { isLive } from "@/lib/pages";
 import { getEvents, getStats } from "@/lib/events";
 import { getNews, getTestimonials } from "@/lib/content";
 
@@ -70,12 +72,16 @@ export default function Home() {
           </p>
 
           <div className="hero-actions">
-            <Link href="/events" className="btn btn-primary">
-              Explore Events →
-            </Link>
-            <Link href="/join" className="btn btn-outline">
-              Join IEEE
-            </Link>
+            {isLive("/events") ? (
+              <Link href="/events" className="btn btn-primary">
+                Explore Events →
+              </Link>
+            ) : (
+              <Link href="/execom" className="btn btn-primary">
+                Meet the Team →
+              </Link>
+            )}
+            <JoinLink className="btn btn-outline">Join IEEE</JoinLink>
           </div>
 
           <div className="hero-meta">Saintgits College of Engineering · IEEE Student Branch</div>
@@ -148,9 +154,9 @@ export default function Home() {
         </div>
       </section>
 
-      <EventsSection events={events} limit={3} />
+      {isLive("/events") && <EventsSection events={events} limit={3} />}
 
-      <SocietySelector events={events} />
+      {isLive("/societies") && <SocietySelector events={events} />}
 
       {/* EXECOM */}
       <section className="execom" id="execom">
@@ -166,11 +172,12 @@ export default function Home() {
             </div>
           </div>
 
-          <TeamGrid people={execom.slice(0, 4)} sizes="(max-width: 700px) 50vw, 20vw" />
+          <TeamGrid people={officeBearers} sizes="(max-width: 700px) 50vw, 20vw" />
         </div>
       </section>
 
       {/* GALLERY TEASER */}
+      {isLive("/gallery") && (
       <section className="gallery" id="gallery">
         <div className="container">
           <div className="gallery-head" data-reveal="stagger">
@@ -196,10 +203,11 @@ export default function Home() {
           </div>
         </div>
       </section>
+      )}
 
       {videoId && <VideoFeature id={videoId} />}
 
-      {news.length > 0 && (
+      {isLive("/news") && news.length > 0 && (
         <section className="news-section" aria-labelledby="news-title">
           <div className="container">
             <div className="gallery-head" data-reveal="stagger">
@@ -225,6 +233,7 @@ export default function Home() {
       <Testimonials items={testimonials} />
 
       {/* NEWSLETTER */}
+      {isLive("/newsletter") && (
       <section className="newsletter" id="newsletter">
         <div className="container newsletter-inner">
           <div className="newsletter-copy" data-reveal="stagger">
@@ -236,6 +245,7 @@ export default function Home() {
           <NewsletterForm />
         </div>
       </section>
+      )}
     </main>
   );
 }

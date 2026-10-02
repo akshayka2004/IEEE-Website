@@ -2,7 +2,9 @@ export const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:30
 export const siteName = "IEEE Student Branch | Saintgits College of Engineering";
 export const siteDescription =
   "IEEE Student Branch at Saintgits College of Engineering — a community of curious minds building technology through workshops, talks, hackathons and societies.";
-export const contactEmail = "ieee@saintgits.org";
+/** Shown only when NEXT_PUBLIC_CONTACT_EMAIL is set — no guessed address on the public site. */
+export const contactEmail: string | undefined = process.env.NEXT_PUBLIC_CONTACT_EMAIL || undefined;
+export const ieeeJoinUrl = "https://www.ieee.org/membership/join";
 
 export const contactPurposes = ["Membership", "Event", "Partnership", "Society", "Project", "Other"] as const;
 export type ContactPurpose = (typeof contactPurposes)[number];

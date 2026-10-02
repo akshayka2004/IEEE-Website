@@ -39,8 +39,13 @@ export default function PrivacyPage() {
           </p>
           <h2>Your choices</h2>
           <p>
-            To access, correct or delete the information you have sent us, email{" "}
-            <a href={`mailto:${contactEmail}`}>{contactEmail}</a>.
+            To access, correct or delete the information you have sent us, contact the branch
+            {contactEmail ? (
+              <>
+                {" "}at <a href={`mailto:${contactEmail}`}>{contactEmail}</a>
+              </>
+            ) : null}
+            .
           </p>
         </div>
       </section>

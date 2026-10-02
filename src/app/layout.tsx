@@ -14,6 +14,7 @@ import SearchPalette from "@/components/SearchPalette";
 import ViewTransitions from "@/components/ViewTransitions";
 import { navLinks } from "@/lib/nav";
 import { getNews } from "@/lib/content";
+import { isLive } from "@/lib/pages";
 import { getNextEvent } from "@/lib/events";
 import { buildSearchIndex } from "@/lib/search";
 import { contactEmail, siteDescription, siteName, siteUrl, socials } from "@/lib/site";
@@ -59,10 +60,10 @@ export const viewport: Viewport = {
 const themeScript = `(function(){var d=document.documentElement;try{d.classList.add('js');var t=localStorage.getItem('ieee-theme');if(!t){t=window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'}d.dataset.theme=t;if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches&&!sessionStorage.getItem('ieee-splash')){d.classList.add('splash-on')}}catch(e){d.classList.add('js')}})();`;
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  const links = [...navLinks];
-  if (getNews().length > 0) links.splice(links.length - 1, 0, { href: "/news", label: "News" });
+  const links = navLinks.filter((l) => isLive(l.href));
+  if (isLive("/news") && getNews().length > 0) links.splice(links.length - 1, 0, { href: "/news", label: "News" });
 
-  const next = getNextEvent();
+  const next = isLive("/events") ? getNextEvent() : undefined;
   const announcement: Announcement | undefined = next
     ? {
         id: next.slug,
@@ -79,7 +80,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     "@type": "EducationalOrganization",
     name: "IEEE Student Branch, Saintgits College of Engineering",
     url: siteUrl,
-    email: contactEmail,
+    ...(contactEmail ? { email: contactEmail } : {}),
     sameAs: socials.map((s) => s.href),
   };
 
@@ -94,7 +95,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <ToastProvider>
           <Navbar links={links} announcement={announcement} />
           {children}
-          <Footer hasNews={links.some((l) => l.href === "/news")} />
+          <Footer />
           <ScrollEffects />
           <RevealController />
           <Interactions />

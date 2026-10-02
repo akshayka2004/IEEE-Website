@@ -1,14 +1,16 @@
 /*
  * Editable site content.
- * Everything here is SAMPLE CONTENT taken from the original design mock-up —
- * replace it with real branch data before launch.
+ * `stats` and `execom` are real. Events, societies, gallery and the rest
+ * are SAMPLE CONTENT from the original design mock-up (those pages are
+ * hidden — see lib/pages.ts) and must be replaced before they are re-launched.
  */
 
 export const stats = [
-  { count: 500, suffix: "+", label: "Members", note: "A growing community" },
-  { count: 50, suffix: "+", label: "Events", note: "Workshops, talks, competitions" },
-  { count: 0, suffix: "", label: "Societies", note: "Diverse domains, one vision" },
-  { count: 25, suffix: "+", label: "Achievements", note: "Recognitions that inspire" },
+  { count: 250, suffix: "+", label: "Members", note: "A growing community" },
+  { count: 100, suffix: "+", label: "Activities", note: "Workshops, talks, competitions" },
+  { count: 8, suffix: "", label: "Societies", note: "Diverse domains, one vision" },
+  { count: 1, suffix: "", label: "Affinity Group", note: "A dedicated community" },
+  { count: 15, suffix: "+", label: "Achievements", note: "Recognitions that inspire" },
 ];
 
 export type RawEvent = {
@@ -159,114 +161,36 @@ export const eventDetails: Record<string, { venue: string; time: string; about: 
 export type Person = {
   name: string;
   role: string;
+  /** Path under /public */
   image: string;
-  bio: string;
-  department?: string;
-  email?: string;
-  linkedin?: string;
-  portfolio?: string;
-  github?: string;
-  ieeeId?: string;
 };
 
+/** Executive committee, in display order. Photos live in /public/execom. */
 export const execom: Person[] = [
-  {
-    name: "Adarsh N",
-    role: "Chair",
-    image: "https://i.pravatar.cc/500?img=12",
-    bio: "Sets the direction of the branch, represents it to IEEE and the college, and coordinates the executive committee.",
-    department: "Computer Science & Engineering",
-    email: "adarsh.n@ieee.org",
-    linkedin: "https://linkedin.com/in/adarsh-n",
-    portfolio: "https://adarshn.dev",
-    github: "https://github.com/adarshn",
-    ieeeId: "IEEE-98741023",
-  },
-  {
-    name: "Meera S",
-    role: "Vice Chair",
-    image: "https://i.pravatar.cc/500?img=47",
-    bio: "Supports the Chair, oversees society activity and steps in to lead when the Chair is unavailable.",
-    department: "Electronics & Communication",
-    email: "meera.s@ieee.org",
-    linkedin: "https://linkedin.com/in/meera-s",
-    portfolio: "https://meeras.design",
-    github: "https://github.com/meeras",
-    ieeeId: "IEEE-98741024",
-  },
-  {
-    name: "Rohan P",
-    role: "Secretary",
-    image: "https://i.pravatar.cc/500?img=11",
-    bio: "Keeps records, minutes and official communication so the branch runs smoothly and transparently.",
-    department: "Electrical & Electronics",
-    email: "rohan.p@ieee.org",
-    linkedin: "https://linkedin.com/in/rohan-p",
-    portfolio: "https://rohanp.me",
-    github: "https://github.com/rohanp",
-    ieeeId: "IEEE-98741025",
-  },
-  {
-    name: "Diya M",
-    role: "Treasurer",
-    image: "https://i.pravatar.cc/500?img=44",
-    bio: "Manages the branch budget, event expenses and financial reporting.",
-    department: "Computer Science & Engineering",
-    email: "diya.m@ieee.org",
-    linkedin: "https://linkedin.com/in/diya-m",
-    portfolio: "https://diyam.dev",
-    github: "https://github.com/diyam",
-    ieeeId: "IEEE-98741026",
-  },
-  {
-    name: "Karthik V",
-    role: "Webmaster",
-    image: "https://i.pravatar.cc/500?img=13",
-    bio: "Maintains this website and the branch's digital presence.",
-    department: "Computer Science & Engineering",
-    email: "karthik.v@ieee.org",
-    linkedin: "https://linkedin.com/in/karthik-v",
-    portfolio: "https://karthikv.dev",
-    github: "https://github.com/karthikv",
-    ieeeId: "IEEE-98741027",
-  },
-  {
-    name: "Anjali R",
-    role: "Events Lead",
-    image: "https://i.pravatar.cc/500?img=48",
-    bio: "Plans and runs workshops, talks and competitions from first idea to final feedback.",
-    department: "Mechanical Engineering",
-    email: "anjali.r@ieee.org",
-    linkedin: "https://linkedin.com/in/anjali-r",
-    portfolio: "https://anjalir.me",
-    github: "https://github.com/anjalir",
-    ieeeId: "IEEE-98741028",
-  },
-  {
-    name: "Nikhil S",
-    role: "Publicity Lead",
-    image: "https://i.pravatar.cc/500?img=14",
-    bio: "Spreads the word about branch activities across campus and social channels.",
-    department: "Electronics & Communication",
-    email: "nikhil.s@ieee.org",
-    linkedin: "https://linkedin.com/in/nikhil-s",
-    portfolio: "https://nikhils.dev",
-    github: "https://github.com/nikhils",
-    ieeeId: "IEEE-98741029",
-  },
-  {
-    name: "Sruthi K",
-    role: "Design Lead",
-    image: "https://i.pravatar.cc/500?img=45",
-    bio: "Creates posters, banners and visual identity for every branch event.",
-    department: "Computer Science & Engineering",
-    email: "sruthi.k@ieee.org",
-    linkedin: "https://linkedin.com/in/sruthi-k",
-    portfolio: "https://sruthik.design",
-    github: "https://github.com/sruthik",
-    ieeeId: "IEEE-98741030",
-  },
+  { name: "Dr. Abraham George", role: "Branch Counselor", image: "/execom/dr-abraham-george.jpg" },
+  { name: "Arin T S", role: "Chair", image: "/execom/arin-t-s.jpg" },
+  { name: "Shone Sajan", role: "Vice Chair", image: "/execom/shone-sajan.jpg" },
+  { name: "Nandana R K", role: "Secretary", image: "/execom/nandana-r-k.jpg" },
+  { name: "Reuben Skariah", role: "Treasurer", image: "/execom/reuben-skariah.jpg" },
+  { name: "Mekha Rachel Moncy", role: "Webmaster", image: "/execom/mekha-rachel-moncy.jpg" },
+  { name: "Reuben Mathew Thomas", role: "Webmaster", image: "/execom/reuben-mathew-thomas.jpg" },
+  { name: "Afiya Irshad", role: "Membership Development Lead", image: "/execom/afiya-irshad.jpg" },
+  { name: "Aaron Binoy", role: "Publicity Lead", image: "/execom/aaron-binoy.jpg" },
+  { name: "Adhil Kurian John", role: "Media Lead", image: "/execom/adhil-kurian-john.jpg" },
+  { name: "Diya Saira Abraham", role: "Content Lead", image: "/execom/diya-saira-abraham.jpg" },
+  { name: "Pranav Suresh", role: "Content Team", image: "/execom/pranav-suresh.jpg" },
+  { name: "Abhiram Madhu", role: "Event Coordinator", image: "/execom/abhiram-madhu.jpg" },
+  { name: "Alvin Varghese Kurian", role: "Event Coordinator", image: "/execom/alvin-varghese-kurian.jpg" },
+  { name: "Arundhathy Devi L", role: "Event Coordinator", image: "/execom/arundhathy-devi-l.jpg" },
+  { name: "Andrew Jos Sebastian", role: "Technical Coordinator", image: "/execom/andrew-jos-sebastian.jpg" },
+  { name: "Nandana Viswanath", role: "Awards Coordinator", image: "/execom/nandana-viswanath.jpg" },
+  { name: "Amal Jebi", role: "Media and Design", image: "/execom/amal-jebi.jpg" },
+  { name: "Hanna K Abraham", role: "Design Team", image: "/execom/hanna-k-abraham.jpg" },
+  { name: "Nabeel Navas", role: "Videographer", image: "/execom/nabeel-navas.jpg" },
 ];
+
+/** The four office bearers shown on the home page. */
+export const officeBearers: Person[] = execom.filter((p) => ["Chair", "Vice Chair", "Secretary", "Treasurer"].includes(p.role));
 
 export type Society = {
   code: string;

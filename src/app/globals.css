@@ -418,13 +418,13 @@ textarea {
 
 .stats-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr) 1.2fr;
+  grid-template-columns: repeat(5, 1fr) 1.3fr;
   min-height: 145px;
   align-items: center;
 }
 
 .stat {
-  padding: 22px 28px;
+  padding: 22px 22px;
   border-right: 1px solid var(--line);
 }
 
@@ -985,7 +985,7 @@ footer {
 
 .footer-grid {
   display: grid;
-  grid-template-columns: 1.4fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1.4fr repeat(auto-fit, minmax(130px, 1fr));
   gap: 45px;
 }
 
@@ -1070,7 +1070,11 @@ footer {
   .stats-grid {
     grid-template-columns: repeat(2, 1fr);
   }
-  .stat:nth-child(2) {
+  .stat:nth-child(even) {
+    border-right: 0;
+  }
+  .stat:nth-child(5) {
+    grid-column: 1 / -1;
     border-right: 0;
   }
   .stat-quote {

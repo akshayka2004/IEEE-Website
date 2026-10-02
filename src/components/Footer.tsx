@@ -1,7 +1,39 @@
 import Link from "next/link";
-import { contactEmail, socials } from "@/lib/site";
+import { isLive } from "@/lib/pages";
+import { contactEmail, ieeeJoinUrl, socials } from "@/lib/site";
 
-export default function Footer({ hasNews = false }: { hasNews?: boolean }) {
+type Item = { href: string; label: string };
+
+const explore: Item[] = [
+  { href: "/about", label: "About" },
+  { href: "/execom", label: "Execom" },
+  { href: "/societies", label: "Societies" },
+  { href: "/join", label: "Join the branch" },
+].filter((i) => isLive(i.href));
+
+const activities: Item[] = [
+  { href: "/events", label: "Events" },
+  { href: "/news", label: "News" },
+  { href: "/newsletter", label: "Newsletter" },
+  { href: "/gallery", label: "Gallery" },
+].filter((i) => isLive(i.href));
+
+const legal: Item[] = [
+  { href: "/privacy", label: "Privacy Policy" },
+  { href: "/terms", label: "Terms of Use" },
+].filter((i) => isLive(i.href));
+
+const resources = [
+  { href: "https://www.ieee.org", label: "IEEE" },
+  { href: "https://ieeexplore.ieee.org", label: "IEEE Xplore" },
+  { href: "https://www.ieee.org/membership", label: "Student Resources" },
+  { href: ieeeJoinUrl, label: "Join IEEE" },
+];
+
+export default function Footer() {
+  const showContact = isLive("/contact");
+  const hasConnect = socials.length > 0 || showContact || Boolean(contactEmail);
+
   return (
     <footer>
       <div className="container">
@@ -20,47 +52,63 @@ export default function Footer({ hasNews = false }: { hasNews?: boolean }) {
             <div className="footer-tagline">People. Ideas. Impact.</div>
           </div>
 
-          <div className="footer-col">
-            <h4>Explore</h4>
-            <Link href="/about">About</Link>
-            <Link href="/execom">Execom</Link>
-            <Link href="/societies">Societies</Link>
-            <Link href="/join">Join the branch</Link>
-          </div>
+          {explore.length > 0 && (
+            <div className="footer-col">
+              <h4>Explore</h4>
+              {explore.map((i) => (
+                <Link key={i.href} href={i.href}>
+                  {i.label}
+                </Link>
+              ))}
+            </div>
+          )}
 
-          <div className="footer-col">
-            <h4>Activities</h4>
-            <Link href="/events">Events</Link>
-            {hasNews && <Link href="/news">News</Link>}
-            <Link href="/newsletter">Newsletter</Link>
-            <Link href="/gallery">Gallery</Link>
-          </div>
+          {activities.length > 0 && (
+            <div className="footer-col">
+              <h4>Activities</h4>
+              {activities.map((i) => (
+                <Link key={i.href} href={i.href}>
+                  {i.label}
+                </Link>
+              ))}
+            </div>
+          )}
 
-          <div className="footer-col">
-            <h4>Connect</h4>
-            {socials.map((s) => (
-              <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer">
-                {s.label}
-              </a>
-            ))}
-            <Link href="/contact">Contact</Link>
-            <a href={`mailto:${contactEmail}`}>Email</a>
-          </div>
+          {hasConnect && (
+            <div className="footer-col">
+              <h4>Connect</h4>
+              {socials.map((s) => (
+                <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer">
+                  {s.label}
+                </a>
+              ))}
+              {showContact && <Link href="/contact">Contact</Link>}
+              {contactEmail && <a href={`mailto:${contactEmail}`}>Email</a>}
+            </div>
+          )}
 
           <div className="footer-col">
             <h4>Resources</h4>
-            <a href="https://www.ieee.org" target="_blank" rel="noopener noreferrer">IEEE</a>
-            <a href="https://ieeexplore.ieee.org" target="_blank" rel="noopener noreferrer">IEEE Xplore</a>
-            <a href="https://www.ieee.org/membership" target="_blank" rel="noopener noreferrer">Student Resources</a>
-            <a href="https://www.ieee.org/membership/join" target="_blank" rel="noopener noreferrer">Join IEEE</a>
+            {resources.map((r) => (
+              <a key={r.label} href={r.href} target="_blank" rel="noopener noreferrer">
+                {r.label}
+              </a>
+            ))}
           </div>
         </div>
 
         <div className="footer-bottom">
           <span>© {new Date().getFullYear()} IEEE Student Branch, Saintgits College of Engineering. All rights reserved.</span>
-          <span>
-            <Link href="/privacy">Privacy Policy</Link> · <Link href="/terms">Terms of Use</Link>
-          </span>
+          {legal.length > 0 && (
+            <span>
+              {legal.map((i, n) => (
+                <span key={i.href}>
+                  {n > 0 && " · "}
+                  <Link href={i.href}>{i.label}</Link>
+                </span>
+              ))}
+            </span>
+          )}
         </div>
       </div>
     </footer>

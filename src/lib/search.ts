@@ -1,6 +1,7 @@
 import { execom, societies } from "./data";
 import { getNews } from "./content";
 import { getEvents } from "./events";
+import { isLive } from "./pages";
 
 export type SearchItem = {
   type: "Page" | "Event" | "Society" | "Person" | "News";
@@ -53,5 +54,5 @@ export function buildSearchIndex(): SearchItem[] {
     href: `/news/${n.slug}`,
   }));
 
-  return [...pages, ...events, ...soc, ...people, ...news];
+  return [...pages, ...events, ...soc, ...people, ...news].filter((i) => isLive(i.href));
 }

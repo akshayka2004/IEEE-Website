@@ -21,9 +21,6 @@ export default function ExecomPage() {
 
       <section className="execom">
         <div className="container">
-          <p className="team-hint" data-reveal="up">
-            Select a team member to read more about their role.
-          </p>
           <TeamGrid people={execom} />
         </div>
       </section>
