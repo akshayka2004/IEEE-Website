@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
@@ -97,9 +98,7 @@ export default function Navbar({ links, announcement }: { links: NavLink[]; anno
 
       <div className="container nav-inner">
         <Link href="/" className="brand" aria-label="IEEE Student Branch, Saintgits College of Engineering — home">
-          <div className="brand-mark" aria-hidden="true">
-            <span>✦</span>
-          </div>
+          <Image src="/brand/sb-emblem.png" alt="" width={40} height={40} className="brand-emblem" priority />
           <div>
             <div className="brand-main">IEEE</div>
             <div className="brand-sub">Student Branch · Saintgits College of Engineering</div>

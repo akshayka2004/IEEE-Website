@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { isLive } from "@/lib/pages";
 import { contactEmail, ieeeJoinUrl, socials } from "@/lib/site";
@@ -39,17 +40,19 @@ export default function Footer() {
       <div className="container">
         <div className="footer-grid">
           <div className="footer-brand">
-            <div className="brand">
-              <div className="brand-mark">
-                <span>✦</span>
-              </div>
-              <div>
-                <div className="brand-main">IEEE</div>
-                <div className="brand-sub">Student Branch · Saintgits College of Engineering</div>
-              </div>
-            </div>
+            <Image
+              src="/brand/sb-lockup-dark.png"
+              alt="Saintgits College IEEE Student Branch"
+              width={780}
+              height={214}
+              className="footer-lockup"
+            />
             <p>Engineering ideas into meaningful impact through technology, collaboration and student leadership.</p>
             <div className="footer-tagline">People. Ideas. Impact.</div>
+            <div className="footer-ieee">
+              <span>Part of</span>
+              <Image src="/brand/ieee-logo-white.png" alt="IEEE" width={1192} height={348} />
+            </div>
           </div>
 
           {explore.length > 0 && (

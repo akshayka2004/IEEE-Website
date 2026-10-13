@@ -1,10 +1,10 @@
-import Image from "next/image";
 import Link from "next/link";
 import CountUp from "@/components/CountUp";
 import EventsSection from "@/components/EventsSection";
 import SocietySelector from "@/components/SocietySelector";
 import NewsletterForm from "@/components/NewsletterForm";
 import RotatingWord from "@/components/RotatingWord";
+import HeroSlides from "@/components/HeroSlides";
 import TeamGrid from "@/components/TeamGrid";
 import Testimonials from "@/components/Testimonials";
 import VideoFeature from "@/components/VideoFeature";
@@ -15,6 +15,15 @@ import { officeBearers, missions, gallery } from "@/lib/data";
 import { isLive } from "@/lib/pages";
 import { getEvents, getStats } from "@/lib/events";
 import { getNews, getTestimonials } from "@/lib/content";
+
+const HERO_SLIDES = [
+  { src: "/campus/campus-4.jpg", position: "50% 64%" },
+  { src: "/campus/campus-2.jpg", position: "50% 72%" },
+  { src: "/campus/campus-5.jpg", position: "50% 62%" },
+  { src: "/campus/campus-6.jpg", position: "50% 76%" },
+  { src: "/campus/campus-3.jpg", position: "50% 78%" },
+  { src: "/campus/campus-1.jpg", position: "50% 80%" },
+];
 
 export default function Home() {
   const stats = getStats();
@@ -28,15 +37,7 @@ export default function Home() {
       {/* HERO */}
       <section className="hero">
         <div className="hero-bg" aria-hidden="true">
-          <Image
-            src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=2200&q=85"
-            alt=""
-            fill
-            priority
-            sizes="100vw"
-            style={{ objectFit: "cover" }}
-            className="hero-img"
-          />
+          <HeroSlides slides={HERO_SLIDES} />
         </div>
         <div className="container hero-content">
           <div className="hero-kicker">
@@ -134,10 +135,10 @@ export default function Home() {
 
           <div className="about-image shimmer" data-reveal="up">
             <Img
-              src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1200&q=85"
-              alt="Students collaborating"
-              width={1200}
-              height={390}
+              src="/campus/campus-3.jpg"
+              alt="Saintgits College of Engineering campus"
+              width={900}
+              height={1200}
               sizes="(max-width: 700px) 100vw, (max-width: 1000px) 50vw, 33vw"
             />
           </div>

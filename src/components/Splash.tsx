@@ -45,10 +45,8 @@ export default function Splash() {
   return (
     <div className="splash" aria-hidden="true">
       <div className="splash-inner">
-        <svg viewBox="0 0 120 120" width="112" height="112" className="splash-mark">
-          <rect className="splash-diamond" x="30" y="30" width="60" height="60" transform="rotate(45 60 60)" pathLength="1" />
-          <path className="splash-star" d="M60 44l4.2 11.8L76 60l-11.8 4.2L60 76l-4.2-11.8L44 60l11.8-4.2z" />
-        </svg>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="/brand/sb-emblem.png" alt="" width={112} height={112} className="splash-emblem" />
         <div className="splash-word">IEEE</div>
         <div className="splash-sub">Student Branch · Saintgits College of Engineering</div>
       </div>

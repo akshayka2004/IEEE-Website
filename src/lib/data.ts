@@ -60,7 +60,6 @@ export const rawEvents: RawEvent[] = [
     title: "Signal Processing in Everyday Devices",
     desc: "A seminar on how signal processing powers the devices we use daily.",
     image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=900&q=85",
-    society: "SPS",
   },
   {
     slug: "power-systems-visit",
@@ -96,7 +95,6 @@ export const rawEvents: RawEvent[] = [
     title: "Student Paper Presentation Symposium",
     desc: "Showcasing undergraduate research across engineering domains.",
     image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=900&q=85",
-    society: "SB",
   },
 ];
 
@@ -196,75 +194,117 @@ export type Society = {
   code: string;
   slug: string;
   name: string;
+  /** "society" = technical society, "affinity" = affinity group */
+  kind: "society" | "affinity";
   desc: string;
   about: string[];
   focus: string[];
+  /** Path under /public */
+  logo: string;
+  /** Official IEEE website */
+  url: string;
 };
 
+/** The branch's 8 technical societies and 1 affinity group. Logos live in /public/societies. */
 export const societies: Society[] = [
   {
-    code: "CS",
-    slug: "cs",
-    name: "IEEE Computer Society",
-    desc: "Software, algorithms and computing systems.",
-    about: ["The Computer Society chapter focuses on software, algorithms, systems and everything that makes modern computing work.", "Members run coding sessions, hackathons and talks on emerging computing topics."],
-    focus: ["Software engineering", "Algorithms", "Cloud & systems", "Cybersecurity"],
+    code: "CAS",
+    slug: "cas",
+    name: "IEEE Circuits and Systems Society",
+    kind: "society",
+    desc: "Theory, analysis and design of circuits and systems.",
+    about: ["The IEEE Circuits and Systems Society is concerned with the theory, analysis, design and implementation of circuits and systems.", "One of the IEEE societies active at the Saintgits IEEE Student Branch."],
+    focus: ["Analog & digital circuits","Signal processing","Systems design"],
+    logo: "/society-logos/cas.png",
+    url: "https://ieee-cas.org",
   },
   {
     code: "CIS",
     slug: "cis",
-    name: "IEEE CIS",
-    desc: "Computational intelligence and machine learning.",
-    about: ["The Computational Intelligence Society explores machine learning, neural networks and intelligent systems.", "Activities include workshops, reading groups and project showcases."],
-    focus: ["Machine learning", "Neural networks", "Data science", "Fuzzy systems"],
+    name: "IEEE Computational Intelligence Society",
+    kind: "society",
+    desc: "Neural networks, fuzzy systems and evolutionary computation.",
+    about: ["The IEEE Computational Intelligence Society covers the theory and application of neural networks, fuzzy systems and evolutionary computation.", "One of the IEEE societies active at the Saintgits IEEE Student Branch."],
+    focus: ["Neural networks","Fuzzy systems","Evolutionary computation"],
+    logo: "/society-logos/cis.png",
+    url: "https://cis.ieee.org",
+  },
+  {
+    code: "ComSoc",
+    slug: "comsoc",
+    name: "IEEE Communications Society",
+    kind: "society",
+    desc: "Communications and networking technologies.",
+    about: ["The IEEE Communications Society advances communications and networking technologies, from wireless systems to optical networks.", "One of the IEEE societies active at the Saintgits IEEE Student Branch."],
+    focus: ["Wireless & mobile","Networking","Optical communications"],
+    logo: "/society-logos/comsoc.png",
+    url: "https://www.comsoc.org",
+  },
+  {
+    code: "CS",
+    slug: "cs",
+    name: "IEEE Computer Society",
+    kind: "society",
+    desc: "Computing, software and information technology.",
+    about: ["The IEEE Computer Society is a leading body for computing and information technology professionals and students.", "One of the IEEE societies active at the Saintgits IEEE Student Branch."],
+    focus: ["Software engineering","Computing systems","Cybersecurity"],
+    logo: "/society-logos/cs.png",
+    url: "https://www.computer.org",
+  },
+  {
+    code: "IAS",
+    slug: "ias",
+    name: "IEEE Industry Applications Society",
+    kind: "society",
+    desc: "Electrical and electronic systems applied in industry.",
+    about: ["The IEEE Industry Applications Society focuses on the application of electrical and electronic systems in industry and commerce.", "One of the IEEE societies active at the Saintgits IEEE Student Branch."],
+    focus: ["Electric machines & drives","Industrial automation","Power systems"],
+    logo: "/society-logos/ias.png",
+    url: "https://ias.ieee.org",
   },
   {
     code: "PES",
     slug: "pes",
-    name: "IEEE PES",
-    desc: "Power and energy systems engineering.",
-    about: ["The Power & Energy Society covers generation, distribution and the transition to sustainable energy.", "Expect industry visits, expert lectures and hands-on energy projects."],
-    focus: ["Renewable energy", "Smart grids", "Power electronics", "Energy efficiency"],
+    name: "IEEE Power & Energy Society",
+    kind: "society",
+    desc: "Electric power generation, delivery and use.",
+    about: ["The IEEE Power & Energy Society covers the generation, transmission, distribution and use of electric power.", "One of the IEEE societies active at the Saintgits IEEE Student Branch."],
+    focus: ["Power systems","Renewable energy","Smart grids"],
+    logo: "/society-logos/pes.png",
+    url: "https://ieee-pes.org",
   },
   {
     code: "RAS",
     slug: "ras",
-    name: "IEEE RAS",
-    desc: "Robotics and autonomous systems.",
-    about: ["The Robotics & Automation Society brings together students who love building machines that sense, decide and act.", "Bootcamps, build nights and competitions keep the workshop busy."],
-    focus: ["Robotics", "Automation", "Embedded systems", "Computer vision"],
+    name: "IEEE Robotics and Automation Society",
+    kind: "society",
+    desc: "Robotics, automation and intelligent machines.",
+    about: ["The IEEE Robotics and Automation Society advances the theory and practice of robotics and automation.", "One of the IEEE societies active at the Saintgits IEEE Student Branch."],
+    focus: ["Robotics","Automation","Intelligent machines"],
+    logo: "/society-logos/ras.png",
+    url: "https://www.ieee-ras.org",
+  },
+  {
+    code: "SSCS",
+    slug: "sscs",
+    name: "IEEE Solid-State Circuits Society",
+    kind: "society",
+    desc: "Design and technology of solid-state and integrated circuits.",
+    about: ["The IEEE Solid-State Circuits Society focuses on the design and technology of solid-state and integrated circuits.", "One of the IEEE societies active at the Saintgits IEEE Student Branch."],
+    focus: ["Integrated circuits","Analog & mixed-signal","IC design"],
+    logo: "/society-logos/sscs.png",
+    url: "https://sscs.ieee.org",
   },
   {
     code: "WIE",
     slug: "wie",
-    name: "IEEE WIE",
-    desc: "Advancing women in engineering.",
-    about: ["Women in Engineering champions women in technical fields through mentoring, networking and visibility.", "Panels, career sessions and community events are open to everyone."],
-    focus: ["Mentorship", "Leadership", "Networking", "Outreach"],
-  },
-  {
-    code: "SPS",
-    slug: "sps",
-    name: "IEEE SPS",
-    desc: "Signal processing theory and applications.",
-    about: ["The Signal Processing Society covers how signals — audio, images, communications — are captured, analysed and transformed.", "Seminars and mini-projects connect theory to everyday devices."],
-    focus: ["Audio & speech", "Image processing", "Communications", "DSP"],
-  },
-  {
-    code: "PHO",
-    slug: "pho",
-    name: "IEEE Photonics",
-    desc: "Light-based technology and devices.",
-    about: ["The Photonics chapter explores lasers, optics and light-based technologies shaping communications and sensing.", "Expect lab demonstrations and guest talks from researchers."],
-    focus: ["Optics", "Lasers", "Fibre communication", "Sensing"],
-  },
-  {
-    code: "SB",
-    slug: "sb",
-    name: "IEEE Student Branch",
-    desc: "The umbrella body connecting every society.",
-    about: ["The Student Branch is the umbrella body that connects every society and runs branch-wide events.", "It is the best place to start if you are new to IEEE."],
-    focus: ["Community", "Professional development", "Cross-society events", "Outreach"],
+    name: "IEEE Women in Engineering",
+    kind: "affinity",
+    desc: "Supporting and inspiring women in engineering and science.",
+    about: ["IEEE Women in Engineering is an IEEE affinity group that supports and inspires women in engineering and science.", "One of the IEEE societies active at the Saintgits IEEE Student Branch."],
+    focus: ["Mentorship","Leadership","Outreach"],
+    logo: "/society-logos/wie.png",
+    url: "https://wie.ieee.org",
   },
 ];
 

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import PageHero from "@/components/PageHero";
 import PurposeTabs from "@/components/PurposeTabs";
+import SocietiesShowcase from "@/components/SocietiesShowcase";
 import Timeline from "@/components/Timeline";
 import Achievements from "@/components/Achievements";
 import SectionDots from "@/components/SectionDots";
@@ -27,12 +28,13 @@ export default function AboutPage() {
         kicker="About IEEE SB"
         title="More than a student branch."
         desc="A community of curious minds, innovators and change-makers building technology for a sustainable and inclusive world."
-        image="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=2200&q=85"
+        image="/campus/campus-6.jpg"
       />
 
       <SectionDots
         sections={[
           { id: "about-intro", label: "Who we are" },
+          { id: "societies", label: "Societies" },
           { id: "purpose", label: "Purpose" },
           ...(timeline.length > 0 ? [{ id: "timeline", label: "Journey" }] : []),
           ...(achievements.length > 0 ? [{ id: "achievements", label: "Recognition" }] : []),
@@ -60,10 +62,10 @@ export default function AboutPage() {
 
           <div className="about-image shimmer" data-reveal="up">
             <Img
-              src="https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=1200&q=85"
-              alt="Students collaborating on a project"
-              width={1200}
-              height={390}
+              src="/campus/campus-5.jpg"
+              alt="Saintgits College of Engineering campus"
+              width={900}
+              height={1200}
               sizes="(max-width: 700px) 100vw, (max-width: 1000px) 50vw, 33vw"
             />
           </div>
@@ -80,6 +82,7 @@ export default function AboutPage() {
         </div>
       </section>
 
+      <SocietiesShowcase />
       <PurposeTabs />
       <Timeline items={timeline} />
       <Achievements items={achievements} />

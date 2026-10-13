@@ -15,7 +15,7 @@ export default function PageHero({
   return (
     <section className="page-hero">
       <div className="page-hero-bg">
-        <Image src={image} alt="" fill sizes="100vw" priority style={{ objectFit: "cover" }} />
+        <Image src={image} alt="" fill sizes="100vw" priority style={{ objectFit: "cover", objectPosition: "50% 72%" }} />
       </div>
       <div className="container page-hero-content">
         <div className="eyebrow">

@@ -3351,3 +3351,206 @@ a.society-wrap {
   letter-spacing: 0.08em;
   margin-top: 4px;
 }
+
+/* ---------- brand logos ---------- */
+.brand-emblem {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  flex: none;
+  object-fit: contain;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.22);
+}
+
+.splash-emblem {
+  width: 112px;
+  height: 112px;
+  border-radius: 50%;
+  object-fit: contain;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.2), 0 0 40px rgba(0, 102, 153, 0.35);
+  opacity: 0;
+  transform: scale(0.6);
+  animation: splashEmblem 0.9s var(--ease) 0.15s forwards;
+}
+
+@keyframes splashEmblem {
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.footer-lockup {
+  width: min(300px, 100%);
+  height: auto;
+  margin-bottom: 20px;
+}
+
+.footer-ieee {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 22px;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #7f8b93;
+}
+
+.footer-ieee img {
+  width: 70px;
+  height: auto;
+}
+
+/* ---------- hero slideshow ---------- */
+.hero-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 1.6s ease;
+}
+
+.hero-slide.is-active {
+  opacity: 1;
+}
+
+.hero-slide:not(.is-active) .hero-img {
+  animation-play-state: paused;
+}
+
+/* ---------- execom banner ---------- */
+.execom-cover {
+  margin: 0 0 28px;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+  background: var(--surface-2);
+}
+
+.execom-cover img {
+  height: auto;
+  width: 100%;
+}
+
+/* ---------- societies on About ---------- */
+.soc-section {
+  padding: 96px 0;
+  background: var(--paper);
+}
+
+.soc-head {
+  margin-bottom: 40px;
+}
+
+.soc-head .section-copy {
+  margin-top: 14px;
+}
+
+.soc-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.soc-grid-affinity {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.soc-subhead {
+  margin: 44px 0 16px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--orange-text);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.soc-subhead::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--line);
+}
+
+.soc-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  overflow: hidden;
+  color: var(--ink);
+  transition: transform 0.3s var(--ease), box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.soc-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--orange);
+  box-shadow: var(--shadow);
+}
+
+/* logos are designed for white — keep a white tile in both themes */
+.soc-logo {
+  position: relative;
+  height: 150px;
+  background: #fff;
+  border-bottom: 1px solid var(--line);
+}
+
+.soc-logo img {
+  position: absolute;
+  top: 18px;
+  left: 22px;
+  width: calc(100% - 44px);
+  height: calc(100% - 36px);
+  object-fit: contain;
+}
+
+.soc-body {
+  padding: 18px 20px 20px;
+  display: grid;
+  gap: 6px;
+  align-content: start;
+  flex: 1;
+}
+
+.soc-body h3 {
+  font-size: 15px;
+  line-height: 1.25;
+}
+
+.soc-body p {
+  color: var(--muted);
+  font-size: 12.5px;
+}
+
+.soc-link {
+  margin-top: 6px;
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--orange-text);
+}
+
+@media (max-width: 1000px) {
+  .soc-grid,
+  .soc-grid-affinity {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 560px) {
+  .soc-grid,
+  .soc-grid-affinity {
+    grid-template-columns: 1fr;
+  }
+  .soc-section {
+    padding: 70px 0;
+  }
+  .soc-logo {
+    height: 130px;
+  }
+}
