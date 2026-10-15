@@ -27,6 +27,50 @@ const HERO_SLIDES = [
   { src: "/campus/campus-1.jpg", position: "50% 80%" },
 ];
 
+const ICON_PROPS = {
+  width: 22,
+  height: 22,
+  viewBox: "0 0 24 24",
+  fill: "none",
+  stroke: "currentColor",
+  strokeWidth: 1.8,
+  strokeLinecap: "round" as const,
+  strokeLinejoin: "round" as const,
+};
+
+const STAT_ICONS: Record<string, React.ReactNode> = {
+  Members: (
+    <svg {...ICON_PROPS}>
+      <circle cx="9" cy="8" r="3.5" />
+      <path d="M2.5 20c.6-3.6 3.2-5.5 6.5-5.5s5.9 1.9 6.5 5.5" />
+      <path d="M16 4.8a3.3 3.3 0 0 1 0 6.4M18.5 14.8c1.6.7 2.6 2.4 3 5.2" />
+    </svg>
+  ),
+  Activities: (
+    <svg {...ICON_PROPS}>
+      <path d="M13 2 4 14h7l-1 8 9-12h-7z" />
+    </svg>
+  ),
+  Societies: (
+    <svg {...ICON_PROPS}>
+      <rect x="3" y="3" width="7.5" height="7.5" rx="1.5" />
+      <rect x="13.5" y="3" width="7.5" height="7.5" rx="1.5" />
+      <rect x="3" y="13.5" width="7.5" height="7.5" rx="1.5" />
+      <rect x="13.5" y="13.5" width="7.5" height="7.5" rx="1.5" />
+    </svg>
+  ),
+  "Affinity Group": (
+    <svg {...ICON_PROPS}>
+      <path d="M12 20.5s-8-4.6-8-10.2A4.4 4.4 0 0 1 12 7.6a4.4 4.4 0 0 1 8 2.7c0 5.6-8 10.2-8 10.2z" />
+    </svg>
+  ),
+  Achievements: (
+    <svg {...ICON_PROPS}>
+      <path d="M7 4h10v5a5 5 0 0 1-10 0zM7 6H4v1.5A3 3 0 0 0 7 10.5M17 6h3v1.5a3 3 0 0 1-3 3M12 14v4M8.5 20.5h7" />
+    </svg>
+  ),
+};
+
 export default function Home() {
   const stats = getStats();
   const events = getEvents();
@@ -98,13 +142,6 @@ export default function Home() {
       {/* STATS */}
       <section className="stats">
         <div className="container stats-grid" data-reveal="stagger">
-          {stats.map((stat) => (
-            <div className="stat" key={stat.label}>
-              <CountUp target={stat.count} suffix={stat.suffix} />
-              <div className="stat-label">{stat.label}</div>
-              <small>{stat.note}</small>
-            </div>
-          ))}
           <div className="stat-quote">
             Students
             <br />
@@ -113,6 +150,16 @@ export default function Home() {
             <em>Real Change.</em>
             <span>—</span>
           </div>
+          {stats.map((stat) => (
+            <div className="stat" key={stat.label}>
+              <span className="stat-icon" aria-hidden="true">
+                {STAT_ICONS[stat.label]}
+              </span>
+              <CountUp target={stat.count} suffix={stat.suffix} />
+              <div className="stat-label">{stat.label}</div>
+              <small>{stat.note}</small>
+            </div>
+          ))}
         </div>
       </section>
 
@@ -157,8 +204,6 @@ export default function Home() {
         </div>
       </section>
 
-      <BranchCounselor />
-
       <SocietiesMarquee />
 
       {isLive("/events") && <EventsSection events={events} limit={3} />}
@@ -179,7 +224,10 @@ export default function Home() {
             </div>
           </div>
 
-          <TeamGrid people={officeBearers} sizes="(max-width: 700px) 50vw, 20vw" />
+          <div className="execom-people">
+            <BranchCounselor />
+            <TeamGrid people={officeBearers} sizes="(max-width: 700px) 50vw, 20vw" />
+          </div>
         </div>
       </section>
 

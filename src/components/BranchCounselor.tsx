@@ -1,27 +1,24 @@
 import Img from "@/components/Img";
 import { execom } from "@/lib/data";
 
+/** Featured card for the Branch Counselor, shown above the office bearers. */
 export default function BranchCounselor() {
   const person = execom.find((p) => p.role === "Branch Counselor");
   if (!person) return null;
 
   return (
-    <section className="counselor" aria-labelledby="counselor-title">
-      <div className="container counselor-inner">
-        <div className="counselor-photo shimmer" data-reveal="up">
-          <Img src={person.image} alt={person.name} width={800} height={1000} sizes="(max-width: 700px) 70vw, 320px" />
-        </div>
-        <div className="counselor-copy" data-reveal="stagger">
-          <div className="eyebrow">Branch Counselor</div>
-          <h2 className="section-title" id="counselor-title">
-            {person.name}
-          </h2>
-          <p>
-            Guiding the IEEE Student Branch at Saintgits College of Engineering, and supporting our students in turning
-            ideas into meaningful impact.
-          </p>
-        </div>
+    <article className="counselor-card spot" data-reveal="up">
+      <div className="counselor-photo shimmer">
+        <Img src={person.image} alt={`${person.name}, ${person.role}`} width={800} height={1000} sizes="(max-width: 700px) 40vw, 180px" />
       </div>
-    </section>
+      <div className="counselor-copy">
+        <div className="eyebrow">Branch Counselor</div>
+        <h3 className="counselor-name">{person.name}</h3>
+        <p>
+          Guiding the IEEE Student Branch at Saintgits College of Engineering, and supporting our students in turning
+          ideas into meaningful impact.
+        </p>
+      </div>
+    </article>
   );
 }
