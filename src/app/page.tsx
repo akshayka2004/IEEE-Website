@@ -11,6 +11,8 @@ import VideoFeature from "@/components/VideoFeature";
 import NewsCard from "@/components/NewsCard";
 import Img from "@/components/Img";
 import JoinLink from "@/components/JoinLink";
+import SocietiesMarquee from "@/components/SocietiesMarquee";
+import BranchCounselor from "@/components/BranchCounselor";
 import { officeBearers, missions, gallery } from "@/lib/data";
 import { isLive } from "@/lib/pages";
 import { getEvents, getStats } from "@/lib/events";
@@ -154,6 +156,10 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <BranchCounselor />
+
+      <SocietiesMarquee />
 
       {isLive("/events") && <EventsSection events={events} limit={3} />}
 

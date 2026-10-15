@@ -3554,3 +3554,127 @@ a.society-wrap {
     height: 130px;
   }
 }
+
+/* ---------- home: societies marquee + branch counselor ---------- */
+.soc-marquee {
+  padding: 80px 0;
+  overflow: hidden;
+}
+.soc-marquee-head {
+  margin-bottom: 32px;
+}
+.soc-marquee-viewport {
+  overflow: hidden;
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+.soc-marquee-track {
+  display: flex;
+  width: max-content;
+  animation: soc-scroll 40s linear infinite;
+}
+.soc-marquee-viewport:hover .soc-marquee-track,
+.soc-marquee-viewport:focus-within .soc-marquee-track {
+  animation-play-state: paused;
+}
+.soc-marquee-row {
+  display: flex;
+  gap: 16px;
+  padding-right: 16px;
+  margin: 0;
+  list-style: none;
+}
+.soc-marquee-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 200px;
+  height: 150px;
+  padding: 18px 16px 14px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--surface);
+  color: inherit;
+  text-decoration: none;
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+.soc-marquee-item:hover,
+.soc-marquee-item:focus-visible {
+  transform: translateY(-4px);
+  border-color: var(--orange);
+  box-shadow: var(--shadow);
+}
+.soc-marquee-logo {
+  position: relative;
+  flex: 1;
+  width: 100%;
+  background: #fff;
+  border-radius: 6px;
+}
+.soc-marquee-logo img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  padding: 4px;
+  object-fit: contain;
+}
+.soc-marquee-name {
+  font-size: 12px;
+  font-weight: 700;
+  text-align: center;
+  line-height: 1.3;
+}
+@keyframes soc-scroll {
+  to {
+    transform: translateX(-50%);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .soc-marquee-viewport {
+    overflow-x: auto;
+    mask-image: none;
+    -webkit-mask-image: none;
+  }
+  .soc-marquee-track {
+    animation: none;
+  }
+}
+
+.counselor {
+  padding: 70px 0;
+}
+.counselor-inner {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 48px;
+  align-items: center;
+}
+.counselor-photo {
+  aspect-ratio: 4 / 5;
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--surface-2);
+}
+.counselor-photo img {
+  object-position: center 15%;
+}
+.counselor-copy p {
+  max-width: 52ch;
+  margin-top: 14px;
+}
+@media (max-width: 700px) {
+  .soc-marquee,
+  .counselor {
+    padding: 56px 0;
+  }
+  .counselor-inner {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  .counselor-photo {
+    max-width: 220px;
+  }
+}
